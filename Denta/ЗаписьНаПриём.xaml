@@ -5,8 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Denta"
         mc:Ignorable="d"
-        Title="ЗаписьНаПриём" Height="450" Width="800">
+        Title="ЗаписьНаПриём" Height="631.837" Width="1143.469" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="263*"></ColumnDefinition>
+            <ColumnDefinition Width="874*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Name="First">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="49*"></RowDefinition>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="246*"></RowDefinition>
+                <RowDefinition Height="3"></RowDefinition>
+                <RowDefinition Height="49*"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
+                <RowDefinition Height="243*"></RowDefinition>
+                <RowDefinition Height="3"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Background="Red"></Label>
+            <Label Background="Red" Foreground="White" FontSize="30" FontStyle="Normal" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Регистратура</Label>
+            <Label Background="Red" Grid.Row="4"></Label>
+            <Label Background="Red" Foreground="White" FontSize="30" FontStyle="Normal" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="4">Бухгалтерия</Label>
+            <Grid Name="Sample1" Grid.Row="2" Background="Red">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="2"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="2"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <Label Foreground="White" FontSize="20" FontStyle="Normal" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_2">Пациенты
+                    </Label>
+                    <Label Background="White" Grid.Row="1"/>
+                    <Label Background="Red" Foreground="White" FontSize="20" FontStyle="Normal"  Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_3" >Новая карточка</Label>
+                    <Label Background="White" Grid.Row="3"/>
+                    <Label Background="Red" Foreground="White" FontSize="20" FontStyle="Normal"  Grid.Row="4"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_4" >Запись на приём</Label>
+                </Grid>
+            </Grid>
+            <Grid Name="Sample2" Grid.Row="6" Background="Red">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="2"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="4"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <Label Foreground="White" FontSize="20" FontStyle="Normal" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_5" >Долги/Предоплата</Label>
+                    <Label Background="White" Grid.Row="1"/>
+                    <Label Background="White" Grid.Row="3"/>
+                    <Label Background="Red" Foreground="White" FontSize="20" FontStyle="Normal"  Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_1" >Движение средств</Label>
+                    <Label FontSize="30" FontStyle="Normal" Background="{x:Null}" HorizontalContentAlignment="Center" Grid.Row="5" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick">ПОМОЩЬ</Label>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

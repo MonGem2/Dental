@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Denta"
         mc:Ignorable="d"
-        Title="DentaPlus BySmurf" Height="631.837" Width="1143.469">
+        Title="DentaPlus BySmurf" Height="631.837" Width="1143.469" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="263*"></ColumnDefinition>

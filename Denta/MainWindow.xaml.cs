@@ -33,32 +33,41 @@ namespace Denta
         private void Label_MouseDoubleClick_1(object sender, MouseButtonEventArgs e) //Движение средств
         {
             ДвижениеСредств движениеСредств = new ДвижениеСредств();
+            Hide();
             движениеСредств.ShowDialog();
+            ShowDialog();
         }
 
         private void Label_MouseDoubleClick_2(object sender, MouseButtonEventArgs e)
         {
             Пациенты пациенты = new Пациенты();
+            Hide();
             пациенты.ShowDialog();
+            ShowDialog();
         }
 
         private void Label_MouseDoubleClick_3(object sender, MouseButtonEventArgs e)
         {
             НоваяКарточка новаяКарточка = new НоваяКарточка();
+            Hide();
             новаяКарточка.ShowDialog();
+            ShowDialog();
         }
 
         private void Label_MouseDoubleClick_4(object sender, MouseButtonEventArgs e)
         {
             ЗаписьНаПриём записьНаПриём = new ЗаписьНаПриём();
+            Hide();
             записьНаПриём.ShowDialog();
-
+            ShowDialog();
         }
 
         private void Label_MouseDoubleClick_5(object sender, MouseButtonEventArgs e)
         {
             ДолгиИлиПредоплата долги = new ДолгиИлиПредоплата();
+            Hide();
             долги.ShowDialog();
+            ShowDialog();
         }
     }
 }
