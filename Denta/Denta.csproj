@@ -55,6 +55,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ДвижениеСредств.xaml.cs">
+      <DependentUpon>ДвижениеСредств.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ДолгиИлиПредоплата.xaml.cs">
+      <DependentUpon>ДолгиИлиПредоплата.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ЗаписьНаПриём.xaml.cs">
+      <DependentUpon>ЗаписьНаПриём.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="НоваяКарточка.xaml.cs">
+      <DependentUpon>НоваяКарточка.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Пациенты.xaml.cs">
+      <DependentUpon>Пациенты.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +82,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ДвижениеСредств.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ДолгиИлиПредоплата.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ЗаписьНаПриём.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="НоваяКарточка.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Пациенты.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

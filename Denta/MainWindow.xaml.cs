@@ -24,5 +24,41 @@ namespace Denta
         {
             InitializeComponent();
         }
+
+        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("If you have any questions, please contact me! Telegram: @programmer_smurf");
+        }
+
+        private void Label_MouseDoubleClick_1(object sender, MouseButtonEventArgs e) //Движение средств
+        {
+            ДвижениеСредств движениеСредств = new ДвижениеСредств();
+            движениеСредств.ShowDialog();
+        }
+
+        private void Label_MouseDoubleClick_2(object sender, MouseButtonEventArgs e)
+        {
+            Пациенты пациенты = new Пациенты();
+            пациенты.ShowDialog();
+        }
+
+        private void Label_MouseDoubleClick_3(object sender, MouseButtonEventArgs e)
+        {
+            НоваяКарточка новаяКарточка = new НоваяКарточка();
+            новаяКарточка.ShowDialog();
+        }
+
+        private void Label_MouseDoubleClick_4(object sender, MouseButtonEventArgs e)
+        {
+            ЗаписьНаПриём записьНаПриём = new ЗаписьНаПриём();
+            записьНаПриём.ShowDialog();
+
+        }
+
+        private void Label_MouseDoubleClick_5(object sender, MouseButtonEventArgs e)
+        {
+            ДолгиИлиПредоплата долги = new ДолгиИлиПредоплата();
+            долги.ShowDialog();
+        }
     }
 }
