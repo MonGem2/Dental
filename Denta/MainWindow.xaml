@@ -37,12 +37,11 @@
                         <RowDefinition></RowDefinition>
 
                     </Grid.RowDefinitions>
-                    <Label Foreground="White" FontSize="20" FontStyle="Normal" Background="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_2">Пациенты
-                    </Label>
+                    <Label Foreground="White" FontSize="20" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_2">Пациенты</Label>
                     <Label Background="White" Grid.Row="1"/>
                     <Label Background="Red" Foreground="White" FontSize="20" FontStyle="Normal"  Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_3" >Новая карточка</Label>
                     <Label Background="White" Grid.Row="3"/>
-                    <Label Background="Red" Foreground="White" FontSize="20" FontStyle="Normal"  Grid.Row="4"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_4" >Запись на приём</Label>
+                    <Label Background="Red" Foreground="White" FontSize="20" FontStyle="Normal"  Grid.Row="4"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  >МЕСТО ДЛЯ ДОРАБОТОК</Label>
                 </Grid>
             </Grid>
             <Grid Name="Sample2" Grid.Row="6" Background="Red">
@@ -64,5 +63,8 @@
                 </Grid>
             </Grid>
         </Grid>
+        <TabControl Grid.Column="1" x:Name="Users">
+            <TabItem Header="ПРИКЛАД">Первая вкладка</TabItem>
+        </TabControl>
     </Grid>
 </Window>

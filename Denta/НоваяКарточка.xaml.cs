@@ -49,14 +49,6 @@ namespace Denta
             MessageBox.Show("Вы в этой вкладке");
         }
 
-        private void Label_MouseDoubleClick_4(object sender, MouseButtonEventArgs e)
-        {
-            ЗаписьНаПриём записьНаПриём = new ЗаписьНаПриём();
-            Hide();
-            записьНаПриём.ShowDialog();
-            Close();
-        }
-
         private void Label_MouseDoubleClick_5(object sender, MouseButtonEventArgs e)
         {
             ДолгиИлиПредоплата долги = new ДолгиИлиПредоплата();

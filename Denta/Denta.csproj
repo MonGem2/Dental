@@ -61,9 +61,6 @@
     <Compile Include="ДолгиИлиПредоплата.xaml.cs">
       <DependentUpon>ДолгиИлиПредоплата.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ЗаписьНаПриём.xaml.cs">
-      <DependentUpon>ЗаписьНаПриём.xaml</DependentUpon>
-    </Compile>
     <Compile Include="НоваяКарточка.xaml.cs">
       <DependentUpon>НоваяКарточка.xaml</DependentUpon>
     </Compile>
@@ -87,10 +84,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ДолгиИлиПредоплата.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ЗаписьНаПриём.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
