@@ -56,5 +56,119 @@ namespace Denta
             долги.ShowDialog();
             Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string Surname, Name, FatherName, Genderrr, DobTel, RabTel, MobTel, Zametki;
+            DateTime date = new DateTime();
+            DateTime date1 = new DateTime();
+            if (SurnameT.Text=="")
+            {
+                Surname = "-";
+            }
+            else
+            {
+                Surname = SurnameT.Text;
+            }
+            if (NameT.Text == "")
+            {
+                Name = "-";
+            }
+            else
+            {
+                Name = NameT.Text;
+            }
+            if (FatherT.Text == "")
+            {
+                FatherName = "-";
+            }
+            else
+            {
+                FatherName = FatherT.Text;
+            }
+            if (Genderr.Text == "")
+            {
+                Genderrr = "-";
+            }
+            else
+            {
+                Genderrr = Genderr.Text;
+            }
+            if (DomT.Text == "")
+            {
+                DobTel = "-";
+            }
+            else
+            {
+                DobTel = DomT.Text;
+            }
+            if (RabT.Text == "")
+            {
+                RabTel = "-";
+            }
+            else
+            {
+                RabTel = RabT.Text;
+            }
+            if (MobT.Text == "")
+            {
+                MobTel = "-";
+            }
+            else
+            {
+                MobTel = MobT.Text;
+            }
+            if (Zamet.Text == "")
+            {
+                Zametki = "-";
+            }
+            else
+            {
+                Zametki = Zamet.Text;
+            }
+            if (Bith.Text == "")
+            {
+                date = DateTime.MinValue;
+            }
+            else
+            {
+                try
+                {
+                    date = DateTime.Parse(Bith.Text);
+                }
+                catch
+                {
+
+                }
+            }
+            if (Today.Text == "")
+            {
+                date1 = DateTime.Now;
+            }
+            else
+            {
+                try
+                {
+                    date1 = DateTime.Parse(Today.Text);
+                }
+                catch
+                {
+
+                }
+            }
+            DbContext.Add(Surname, Name, FatherName, Genderrr, DobTel, RabTel, MobTel, Zametki, date, date1);
+            MessageBox.Show("Добавлено успешно!");
+            Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Today.Text = DateTime.Today.ToShortDateString();
+        }
     }
 }

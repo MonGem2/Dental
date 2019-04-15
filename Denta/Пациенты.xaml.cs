@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +47,7 @@ namespace Denta
             НоваяКарточка новаяКарточка = new НоваяКарточка();
             Hide();
             новаяКарточка.ShowDialog();
-            Close();
+            Show();
         }
 
 
@@ -56,6 +57,42 @@ namespace Denta
             Hide();
             долги.ShowDialog();
             Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            НоваяКарточка новая = new НоваяКарточка();
+            Hide();
+            новая.ShowDialog();
+            Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //grid.ColumnWidth = 200;
+            grid.ItemsSource = DbContext.selectFirtst();
+           
+            // grid.Column = 200;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView customer = (DataRowView)grid.SelectedItem;
+                DbContext.Delete(customer[0].ToString());
+                // MessageBox.Show(customer[0].ToString());
+                MessageBox.Show("Удачно удалён");
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e) //update
+        {
+
         }
     }
 }

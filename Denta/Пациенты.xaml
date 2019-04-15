@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Denta"
         mc:Ignorable="d"
-        Title="Пациенты" Height="631.837" Width="1143.469" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Пациенты" Height="631.837" Width="1143.469" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="263*"></ColumnDefinition>
@@ -80,8 +80,8 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold">Новая карточка</Button>
-                <Button Grid.Column="1" FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold">Удалить</Button>
+                <Button FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold" Click="Button_Click">Новая карточка</Button>
+                <Button Grid.Column="1" FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold" Click="Button_Click_1">Удалить</Button>
                 <Button Grid.Column="2" FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold">Открыть</Button>
                 <Button Grid.Column="3" FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold">Новое лечение</Button>
                 <Button Grid.Column="4" FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold">Финансы</Button>
@@ -91,9 +91,12 @@
                     <ComboBoxItem Content="Номер карты" FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold"></ComboBoxItem>
                 </ComboBox>
                 <TextBox Grid.Column="7"  FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold" Name="Textbox"></TextBox>
-                <Button Grid.Column="8" FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold">Обновить</Button>
+                <Button Grid.Column="8" FontSize="15" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold" Click="Button_Click_2">Обновить</Button>
             </Grid>
+            <DataGrid Name="grid" Grid.Row="1" ColumnWidth="*" >
+                
+            </DataGrid> 
+
         </Grid>
-        
     </Grid>
 </Window>

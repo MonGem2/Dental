@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Denta"
         mc:Ignorable="d"
-        Title="НоваяКарточка" Height="631.837" Width="1143.469" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="НоваяКарточка" Height="631.837" Width="1143.469" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="263*"></ColumnDefinition>
@@ -61,6 +61,51 @@
                     <Label Background="Red" Foreground="White" FontSize="20" FontStyle="Normal"  Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick_1" >Движение средств</Label>
                     <Label FontSize="30" FontStyle="Normal" Background="{x:Null}" HorizontalContentAlignment="Center" Grid.Row="5" VerticalContentAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick">ПОМОЩЬ</Label>
                 </Grid>
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="550*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="193*"/>
+                    <ColumnDefinition Width="193*"/>
+
+                </Grid.ColumnDefinitions>
+                <Button FontSize="25" Click="Button_Click_1">SAVE</Button>
+                <Button FontSize="25" Grid.Column="1" Click="Button_Click">CANCEL</Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+
+                </Grid.ColumnDefinitions>
+                <Label Content="Фамилия:" FontSize="40" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="Имя:" FontSize="40" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"/>
+                <Label Content="Отчество:" FontSize="40" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top"/>
+                <Label Content="Рождён:" FontSize="40" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top"/>
+                <Label Content="Пол:" FontSize="40" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top"/>
+                <Label Content="ДомТел:" FontSize="40" HorizontalAlignment="Left" Margin="10,350,0,0" VerticalAlignment="Top"/>
+                <Label Content="РабТел:" FontSize="40" HorizontalAlignment="Left" Margin="8,414,0,0" VerticalAlignment="Top"/>
+                <Label Content="МобТел:" FontSize="40" HorizontalAlignment="Left" Margin="10,476,0,0" VerticalAlignment="Top"/>
+                <Label Content="Заметки:" FontSize="40" HorizontalAlignment="Left" Margin="127.2,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <TextBox Name="SurnameT" FontSize="35" HorizontalAlignment="Left" Height="50" Margin="215,24,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2"/>
+                <TextBox  Name="NameT" FontSize="35" HorizontalAlignment="Left" Height="50" Margin="215,93,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2"/>
+                <TextBox Name="FatherT" FontSize="35" HorizontalAlignment="Left" Height="50" Margin="215,162,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2"/>
+                <TextBox Name="DomT"  FontSize="35" HorizontalAlignment="Left" Height="50" Margin="215,364,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2"/>
+                <TextBox Name="RabT" FontSize="35" HorizontalAlignment="Left" Height="50" Margin="215,419,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2"/>
+                <TextBox Name="MobT" FontSize="35" HorizontalAlignment="Left" Height="50" Margin="215,490,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2"/>
+                <TextBox Name="Zamet" FontSize="35" HorizontalAlignment="Left" Height="399" Margin="45.2,79,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="349" Grid.Column="1"/>
+                <DatePicker Name="Bith"  HorizontalAlignment="Left" Height="64" Margin="215,217,0,0" VerticalAlignment="Top"  FontSize="30"  Width="212"/>
+                <ComboBox Name="Genderr"   HorizontalAlignment="Left" Height="43" Margin="215,307,0,0" VerticalAlignment="Top"  Width="212">
+                    <ComboBoxItem Content="Мужской" FontSize="35" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold"></ComboBoxItem>
+                    <ComboBoxItem Content="Женский" FontSize="35" Background="AliceBlue" Foreground="SeaGreen" FontWeight="Bold"></ComboBoxItem>
+                </ComboBox>
+                <DatePicker Name="Today"  HorizontalAlignment="Left" Height="64" Margin="45.2,476,0,0" VerticalAlignment="Top"  FontSize="30"  Width="349" Grid.Column="1"/>
             </Grid>
         </Grid>
     </Grid>
