@@ -6,9 +6,44 @@
         xmlns:local="clr-namespace:Dental"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            
-        </Grid.ColumnDefinitions>
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="35*"/>
+            </Grid.ColumnDefinitions>
+            <Frame Grid.Column="1" Name="Pager" Content=""/>
+            <StackPanel Margin="0,0,0,250" Background="WhiteSmoke">
+                <Grid Background="WhiteSmoke">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Регистратура" Foreground="#FF090068" FontSize="16"/>
+                    <Button Content="Пациенты" Foreground="#FF090068" Grid.Row="1" HorizontalContentAlignment="Left" Background="WhiteSmoke" BorderThickness="0" Click="Patients_Click"/>
+                    <Button Content="Добавить карточку" Foreground="#FF090068" Grid.Row="2" HorizontalContentAlignment="Left" Background="WhiteSmoke" BorderThickness="0" Click="AddCard_Click"/>
+                </Grid>
+            </StackPanel>
+            <StackPanel Margin="0,90,0,200" Background="WhiteSmoke">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Касса" Foreground="#FF090068" FontSize="16"/>
+                    <Button Content="Долги/Предоплата" Foreground="#FF090068" Grid.Row="1" HorizontalContentAlignment="Left" Background="WhiteSmoke" BorderThickness="0" Click="Depth_Click"/>
+                    <Button Content="Транзакции" Foreground="#FF090068" Grid.Row="2" HorizontalContentAlignment="Left" Background="WhiteSmoke" BorderThickness="0" Click="Transaction_Click"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

@@ -24,5 +24,22 @@ namespace Dental
         {
             InitializeComponent();
         }
+
+        private void Patients_Click(object sender, RoutedEventArgs e)
+        {
+            Pager.Content = new Patients();
+        }
+        private void AddCard_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        private void Depth_Click(object sender, RoutedEventArgs e)
+        {
+            Pager.Content = new Depth();
+        }
+        private void Transaction_Click(object sender, RoutedEventArgs e)
+        {
+            Pager.Content = new Transactions();
+        }
     }
 }
