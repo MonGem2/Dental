@@ -55,32 +55,32 @@ namespace Dental
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
-            string path = "Base/Denta.db";
-            SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-            try
-            {
-                _con.Open();
-                string query = $"Delete from [Transactions] where Id='{sel}'";
-                if (textb.Text != "") // Note: txt_Search is the TextBox..
-                {
-                    query += $" where Name Like '%{textb.Text}%'";
-                }
-                SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                _cmd.ExecuteNonQuery();
-
-                SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                DataTable _dt = new DataTable("tbl_user");
-                _adp.Fill(_dt);
-                View.ItemsSource = _dt.DefaultView;
-                _adp.Update(_dt);
-
-                _con.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+          //  
+          //  string path = "Base/Denta.db";
+          //  SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+          //  try
+          //  {
+          //      _con.Open();
+          //      string query = $"Delete from [Transactions] where Id='{sel}'";
+          //      if (textb.Text != "") // Note: txt_Search is the TextBox..
+          //      {
+          //          query += $" where Name Like '%{textb.Text}%'";
+          //      }
+          //      SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+          //      _cmd.ExecuteNonQuery();
+          //
+          //      SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+          //      DataTable _dt = new DataTable("tbl_user");
+          //      _adp.Fill(_dt);
+          //      View.ItemsSource = _dt.DefaultView;
+          //      _adp.Update(_dt);
+          //
+          //      _con.Close();
+          //  }
+          //  catch (Exception ex)
+          //  {
+          //      MessageBox.Show(ex.Message);
+          //  }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
