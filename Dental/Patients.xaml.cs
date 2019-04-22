@@ -17,6 +17,7 @@ using System.Data.SQLite;
 using System.Data.Common;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 
 namespace Dental
 {
@@ -33,8 +34,9 @@ namespace Dental
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            string path = "Base/Denta.db";
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
             string text = "Select * From [Patients]";
+            MessageBox.Show(path);
             SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
             try
             {
@@ -64,7 +66,8 @@ namespace Dental
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string path = "Base/Denta.db";
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+
             switch (current)
             {
                 case 0:
@@ -245,7 +248,7 @@ namespace Dental
 
         //private void View_AddingNewItem(object sender, AddingNewItemEventArgs e)
         //{
-        //    string path = "Base/Denta.db";
+        //    string path =string path = System.IO.Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName,"Dental.exe") + "Base/Denta.db";;
         //    string text = "Insert into [Patients] (Name,Surname,)";
         //    SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
         //    try

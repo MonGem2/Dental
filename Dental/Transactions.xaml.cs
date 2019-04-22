@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace Dental
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            string path = "Base/Denta.db";
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
             string text = "Select * From [Transactions]";
             SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
             try
@@ -56,7 +57,7 @@ namespace Dental
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
           //  
-          //  string path = "Base/Denta.db";
+          //  string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName + @"\Base\Denta.db";
           //  SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
           //  try
           //  {
@@ -85,7 +86,7 @@ namespace Dental
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string path = "Base/Denta.db";
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
             switch (current)
             {
                 case 0:
