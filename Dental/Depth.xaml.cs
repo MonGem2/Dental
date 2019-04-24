@@ -23,6 +23,7 @@ namespace Dental
     /// </summary>
     public partial class Depth : Page
     {
+        int current = 0;
         public Depth()
         {
             InitializeComponent();
@@ -56,24 +57,39 @@ namespace Dental
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                (new AddDepth(((DataRowView)View.SelectedItems[0])["Id"].ToString())).ShowDialog();
+            }
+            catch { }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            switch (current)
+            try
             {
-                case 0:
+                DataRowView row = (DataRowView)View.SelectedItems[0];
+
+                SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                try
                 {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                    _con.Open();
+                    string query = $"Delete from [Depth] where Id='{ row["id"]}'";
+                    SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                    _cmd.ExecuteNonQuery();
+
+                    _con.Close();
+                }
+                catch
+                {
+                }
+                finally
+                {
                     try
                     {
                         _con.Open();
-                        string query = "select * from [Transactions]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where Name Like '%{textb.Text}%'";
-                        }
+                        string query = "select * from [Depth]";
                         SQLiteCommand _cmd = new SQLiteCommand(query, _con);
                         _cmd.ExecuteNonQuery();
 
@@ -85,102 +101,13 @@ namespace Dental
 
                         _con.Close();
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        MessageBox.Show(ex.Message);
                     }
-                    break;
-                }
-                case 1:
-                {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Transactions]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where Surname Like '%{textb.Text}%'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
 
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable();
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
-                }
-                case 2:
-                {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Transactions]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where FatherName Like '%{textb.Text}%'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
-
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable();
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
-                }
-                case 3:
-                {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Transactions]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where Description Like '@{textb.Text}@'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
-
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable();
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
                 }
             }
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            current = combo.SelectedIndex;
+            catch { }
         }
     }
 }
