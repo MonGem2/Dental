@@ -59,7 +59,7 @@ namespace Dental
         {
             try
             {
-                (new AddDepth().ShowDialog());
+                (new AddDepth()).ShowDialog();
             }
             catch { }
         }
