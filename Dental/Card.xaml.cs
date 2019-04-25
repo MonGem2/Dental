@@ -36,7 +36,26 @@ namespace Dental
 
 
             string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            string text = $"Select [Date_Birth] From [Patients] where Id='{id}'";
+
+            string text = $"Select [Date] From [Patients] where Id='{id}'";
+            try
+            {
+                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                con.Open();
+                SQLiteCommand comand = new SQLiteCommand(text, con);
+                SQLiteDataReader dataReader = comand.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    Info.Text += "Дата создания карты: " + dataReader.GetString(0) + "\n";
+                }
+                con.Dispose();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            text = $"Select [Date_Birth] From [Patients] where Id='{id}'";
             try
             {
                 SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
