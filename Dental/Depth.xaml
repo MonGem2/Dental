@@ -53,7 +53,7 @@
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Если число отрицательное значит это предоплата" Grid.ColumnSpan="2" Foreground="#7F000000"/>
+                <Label Content="Если число отрицательное значит это предоплата" Grid.ColumnSpan="3" Foreground="#7F000000"/>
                 <Button Content="Добавить Долг" Grid.Column="4" Click="Button_Click_1"/>
                 <Button Content="Удалить Долг" Grid.Column="5" Click="Button_Click_2"/>
                 <Button Content="⨉" Grid.Column="6" Background="IndianRed" Click="Button_Click"/>
