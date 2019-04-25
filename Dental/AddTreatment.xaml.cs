@@ -12,46 +12,44 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Dental
 {
     /// <summary>
-    /// Interaction logic for New_Card.xaml
+    /// Interaction logic for AddTreatment.xaml
     /// </summary>
-    public partial class New_Card : Page
+    public partial class AddTreatment : Window
     {
-        public New_Card()
+        public AddTreatment()
         {
             InitializeComponent();
+        }
+        string id_Patient;
+        public AddTreatment(string id_Patient)
+        {
+            InitializeComponent();
+            Date.Text = DateTime.Today.ToShortDateString();
+            this.id_Patient = id_Patient;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            (this).NavigationService.GoBack();
-            (this).NavigationService.RemoveBackEntry();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (surname.Text == string.Empty)
+            if (Descr.Text == string.Empty || Date.Text == string.Empty)
             {
-                MessageBox.Show("Surname can`t be empty!!!");
+                MessageBox.Show("Заполните поля!!!");
             }
             else
             {
                 string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
                 SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                 _con.Open();
-                string query = $"insert into [Patients] (Name,Surname,FatherName,Gender,Mobile_Phone,Home_Phone,Work_Phone,Date_Birth,Description) values ('{name.Text}','{surname.Text}','{fathername.Text}','{gender.Text}','{mobphone.Text}','{homephone.Text}','{workphone.Text}','{birth.Text}','{descr.Text}')";
+                string query = $"insert into [Treatment] (Date,Description,id_Patient) values ('{Date.Text}','{Descr.Text}','{id_Patient}')";
                 SQLiteCommand _cmd = new SQLiteCommand(query, _con);
                 _cmd.ExecuteNonQuery();
 
                 _con.Close();
-
-                (this).NavigationService.GoBack();
-                (this).NavigationService.RemoveBackEntry();
+                this.Close();
             }
         }
     }

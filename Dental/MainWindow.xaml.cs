@@ -31,7 +31,7 @@ namespace Dental
         }
         private void AddCard_Click(object sender, RoutedEventArgs e)
         {
-            
+            Pager.Content = new New_Card();
         }
         private void Depth_Click(object sender, RoutedEventArgs e)
         {

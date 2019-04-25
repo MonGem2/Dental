@@ -17,6 +17,7 @@ using System.Data.SQLite;
 using System.Data.Common;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 
 namespace Dental
 {
@@ -30,11 +31,13 @@ namespace Dental
         {
             InitializeComponent();
         }
-
+        //DataRowView row = (DataRowView)dg.SelectedItems[0];
+        //row["Id"]
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            string path = "Base/Denta.db";
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
             string text = "Select * From [Patients]";
+            // MessageBox.Show(path);
             SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
             try
             {
@@ -59,12 +62,53 @@ namespace Dental
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+            try
+            {
+                DataRowView row = (DataRowView)View.SelectedItems[0];
 
+                SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                try
+                {
+                    _con.Open();
+                    string query = $"Delete from [Patients] where Id='{ row["id"]}'";
+                    SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                    _cmd.ExecuteNonQuery();
+
+                    _con.Close();
+                }
+                catch
+                {
+                }
+                finally {
+                    try
+                    {
+                        _con.Open();
+                        string query = "select * from [Patients]";
+                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                        _cmd.ExecuteNonQuery();
+
+                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+                        DataTable _dt = new DataTable("tbl_user");
+                        _adp.Fill(_dt);
+                        View.ItemsSource = _dt.DefaultView;
+                        _adp.Update(_dt);
+
+                        _con.Close();
+                    }
+                    catch
+                    {
+                    }
+                    
+                }
+            }
+            catch{ }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string path = "Base/Denta.db";
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+
             switch (current)
             {
                 case 0:
@@ -243,23 +287,22 @@ namespace Dental
             current = combo.SelectedIndex;
         }
 
-        //private void View_AddingNewItem(object sender, AddingNewItemEventArgs e)
-        //{
-        //    string path = "Base/Denta.db";
-        //    string text = "Insert into [Patients] (Name,Surname,)";
-        //    SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-        //    try
-        //    {
-        //        con.Open();
-        //        DataSet ds = new DataSet();
-        //        var da = new SQLiteDataAdapter(text, con);
-        //        
-        //        View.ItemsSource = ds.Tables[0].DefaultView;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+            this.NavigationService.Navigate(new Card(((DataRowView)View.SelectedItems[0])["Name"].ToString(), ((DataRowView)View.SelectedItems[0])["Surname"].ToString(), ((DataRowView)View.SelectedItems[0])["FatherName"].ToString(), ((DataRowView)View.SelectedItems[0])["Id"].ToString()));
+            }
+            catch { }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                (new AddTreatment(((DataRowView)View.SelectedItems[0])["Id"].ToString())).ShowDialog();
+            }
+            catch { }
+        }
     }
 }

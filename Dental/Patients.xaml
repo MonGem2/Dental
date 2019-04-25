@@ -43,7 +43,7 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <Grid Height="25">
+            <Grid Height="25" Background="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="10*"/>
@@ -75,14 +75,13 @@
                 </ComboBox>
                 <TextBox Grid.Column="4" Style="{StaticResource MyWaterMarkStyle}" Tag="Search" TextChanged="TextBox_TextChanged" Name="textb">
                 </TextBox>
-                <Button Content="Новая карточка"/>
-                <Button Content="Открыть карточку" Grid.Column="1"/>
-                <Button Content="Добавить лечение" Grid.Column="2"/>
+                <Button Content="Открыть карточку" Grid.Column="1" Click="Button_Click_2"/>
+                <Button Content="Добавить лечение" Grid.Column="2" Click="Button_Click_3"/>
                 <Button Content="Удалить пациента" Grid.Column="3" Click="Button_Click_1"/>
                 <Button Content="⨉" Grid.Column="6" Background="IndianRed" Click="Button_Click"/>
             </Grid>
         </StackPanel>
-        <DataGrid Grid.Row="1" Name="View">
+        <DataGrid Grid.Row="1" Name="View" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
         </DataGrid>
     </Grid>
 </Page>

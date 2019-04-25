@@ -46,40 +46,20 @@
             <Grid Height="25" Background="WhiteSmoke">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="13*"/>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="5">
-                    <ComboBoxItem>
-                        По имени
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        По фамилии
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        По отчеству
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        По телефону
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        По описанию
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        По номеру медицинской карты
-                    </ComboBoxItem>
-                </ComboBox>
-                <TextBox Grid.Column="4" Style="{StaticResource MyWaterMarkStyle}" Tag="Search">
-                </TextBox>
-                <Button Content="Удалить Долг" Grid.Column="3" Click="Button_Click_1"/>
+                <Label Content="Если число отрицательное значит это предоплата" Grid.ColumnSpan="3" Foreground="#7F000000"/>
+                <Button Content="Добавить Долг" Grid.Column="4" Click="Button_Click_1"/>
+                <Button Content="Удалить Долг" Grid.Column="5" Click="Button_Click_2"/>
                 <Button Content="⨉" Grid.Column="6" Background="IndianRed" Click="Button_Click"/>
             </Grid>
         </StackPanel>
-        <DataGrid Grid.Row="1" Name="View">
+        <DataGrid Grid.Row="1" Name="View" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
         </DataGrid>
     </Grid>
 </Page>
