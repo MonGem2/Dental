@@ -48,7 +48,7 @@ namespace Dental
                     string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
                     SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                     _con.Open();
-                    string query = $"insert into [Transactions] (Suma,Description,id_Patient) values ('{Price.Text}','{Descr.Text}','{Id_Pat.Text}')";
+                    string query = $"insert into [Transactions] (Suma,Description,id_Patient,Date) values ('{Price.Text}','{Descr.Text}','{Id_Pat.Text}','{Date.Text}')";
                     SQLiteCommand _cmd = new SQLiteCommand(query, _con);
                     _cmd.ExecuteNonQuery();
 

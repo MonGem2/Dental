@@ -98,11 +98,11 @@ namespace Dental
                 SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                 try
                 {
-                    string sum = ((double)row["Suma"]).ToString();
-                    sum.Replace('.', ',');
+                    
+                    double sum = (double)row["Suma"];
                     SQLiteConnection _con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                     _con1.Open();
-                    string query1 = $"insert into [Transactions] (Suma,Description,id_Patient) values ('{sum}','{row["Description"].ToString()}','{row["id_Patient"].ToString()}')";
+                    string query1 = $"insert into [Transactions] (Suma,Description,id_Patient,Date) values ('{sum.ToString()}','{row["Description"].ToString()}','{row["id_Patient"].ToString()}','{row["Date"].ToString()}')";
                     SQLiteCommand _cmd1 = new SQLiteCommand(query1, _con1);
                     _cmd1.ExecuteNonQuery();
 

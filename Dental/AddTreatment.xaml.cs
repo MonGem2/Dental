@@ -54,7 +54,7 @@ namespace Dental
 
                 SQLiteConnection _con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                 _con1.Open();
-                query = $"insert into [Depth] (id_Patient,Suma) values ('{id_Patient}','{Price.Text}')";
+                query = $"insert into [Depth] (id_Patient,Suma,Date) values ('{id_Patient}','{Price.Text}','{Date.Text}')";
                 SQLiteCommand _cmd1 = new SQLiteCommand(query, _con1);
                 _cmd1.ExecuteNonQuery();
 
