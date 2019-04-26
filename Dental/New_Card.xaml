@@ -89,7 +89,7 @@
             <TextBox Margin="5,0,5,5" Grid.Row="4" Grid.Column="1" Name="mobphone" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <TextBox Margin="5,0,5,5" Grid.Row="5" Grid.Column="1" Name="homephone" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <TextBox Margin="5,0,5,5" Grid.Row="6" Grid.Column="1" Name="workphone" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
-            <TextBox Margin="5,0,5,5" Grid.Row="7" Grid.Column="1" Name="birth" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
+            <DatePicker Margin="5,0,5,5" Grid.Row="7" Grid.Column="1" Name="birth"/>
             <TextBox Margin="5,0,5,5" Grid.Row="8" Grid.Column="1" Name="descr" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <Button Grid.Row="5" Grid.RowSpan="2" Grid.Column="2" Margin="10,10" Content="Готово" Click="Button_Click_1"/>
         </Grid>

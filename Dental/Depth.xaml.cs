@@ -59,7 +59,7 @@ namespace Dental
         {
             try
             {
-                (new AddDepth(((DataRowView)View.SelectedItems[0])["Id"].ToString())).ShowDialog();
+                (new AddDepth()).ShowDialog();
             }
             catch { }
         }
