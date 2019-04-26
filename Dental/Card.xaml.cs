@@ -52,7 +52,7 @@ namespace Dental
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                 
             }
 
             text = $"Select [Date_Birth] From [Patients] where Id='{id}'";
@@ -70,7 +70,7 @@ namespace Dental
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                 
             }
 
             text = $"Select [Mobile_Phone] From [Patients] where Id='{id}'";
@@ -88,7 +88,7 @@ namespace Dental
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                 
             }
 
             text = $"Select [Home_Phone] From [Patients] where Id='{id}'";
@@ -106,7 +106,7 @@ namespace Dental
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                 
             }
 
             text = $"Select [Work_Phone] From [Patients] where Id='{id}'";
@@ -124,7 +124,7 @@ namespace Dental
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                 
             }
 
             text = $"Select [Description] From [Patients] where Id='{id}'";
@@ -142,63 +142,69 @@ namespace Dental
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                 
             }
 
             text = $"Select [Date] From [Treatment] where id_Patient='{id}'";
 
             try
             {
+                string tmp = string.Empty;
+                string tmp1 = string.Empty;
                 SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                 con.Open();
                 SQLiteCommand comand = new SQLiteCommand(text, con);
                 SQLiteDataReader dataReader = comand.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    Treatment.Text += "Дата: " + dataReader.GetString(0) + "\n";
-                    text = $"Select [Description] From [Treatment] where id_Patient='{id}' and Date='{dataReader.GetString(0)}'";
-
-                    try
+                    if (dataReader.GetString(0) != tmp)
                     {
-                        SQLiteConnection con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                        con1.Open();
-                        SQLiteCommand comand1 = new SQLiteCommand(text, con1);
-                        SQLiteDataReader dataReader1 = comand1.ExecuteReader();
-                        while (dataReader1.Read())
+                        Treatment.Text += "Дата: " + dataReader.GetString(0) + "\n";
+                        text = $"Select [Description] From [Treatment] where id_Patient='{id}' and Date='{dataReader.GetString(0)}'";
+
+                        try
                         {
-                            Treatment.Text += "Описание: " + dataReader1.GetString(0) + "\n";
-                            text = $"Select [Price] From [Treatment] where id_Patient='{id}' and Date='{dataReader.GetString(0)}'";
+                            SQLiteConnection con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                            con1.Open();
+                            SQLiteCommand comand1 = new SQLiteCommand(text, con1);
+                            SQLiteDataReader dataReader1 = comand1.ExecuteReader();
+                            while (dataReader1.Read())
+                            {
+                                Treatment.Text += "Описание: " + dataReader1.GetString(0) + "\n";
+                                text = $"Select [Price] From [Treatment] where id_Patient='{id}' and Date='{dataReader.GetString(0)}' and Description='{dataReader1.GetString(0)}'";
 
-                            try
-                            {
-                                SQLiteConnection con2 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                                con2.Open();
-                                SQLiteCommand comand2 = new SQLiteCommand(text, con2);
-                                SQLiteDataReader dataReader2 = comand2.ExecuteReader();
-                                while (dataReader2.Read())
+                                try
                                 {
-                                    Treatment.Text += "Цена: " + dataReader2.GetString(0) + "\n";
+                                    SQLiteConnection con2 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                                    con2.Open();
+                                    SQLiteCommand comand2 = new SQLiteCommand(text, con2);
+                                    SQLiteDataReader dataReader2 = comand2.ExecuteReader();
+                                    while (dataReader2.Read())
+                                    {
+                                        Treatment.Text += "Цена: " + dataReader2.GetDouble(0).ToString() + "\n";
+                                    }
+                                    con2.Dispose();
                                 }
-                                con2.Dispose();
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show(e.Message);
+                                }
                             }
-                            catch (Exception e)
-                            {
-                                MessageBox.Show(e.Message);
-                            }
+                            con1.Dispose();
+
                         }
-                        con1.Dispose();
-                        
+                        catch (Exception e)
+                        {
+                             
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message);
-                    }
+                    tmp = dataReader.GetString(0);
                 }
                 con.Dispose();
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                 
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)

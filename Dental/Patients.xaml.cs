@@ -84,6 +84,22 @@ namespace Dental
                     _cmd1.ExecuteNonQuery();
 
                     _con1.Close();
+
+                    SQLiteConnection _con2 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                    _con2.Open();
+                    string query2 = $"Delete from [Depth] where id_Patient='{ row["id"]}'";
+                    SQLiteCommand _cmd2 = new SQLiteCommand(query2, _con2);
+                    _cmd2.ExecuteNonQuery();
+
+                    _con2.Close();
+
+                    SQLiteConnection _con3 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                    _con3.Open();
+                    string query3 = $"Delete from [Transactions] where id_Patient='{ row["id"]}'";
+                    SQLiteCommand _cmd3 = new SQLiteCommand(query3, _con3);
+                    _cmd3.ExecuteNonQuery();
+
+                    _con3.Close();
                 }
                 catch
                 {

@@ -58,7 +58,7 @@ namespace Dental
         {
             try
             {
-                (new AddTransaction(((DataRowView)View.SelectedItems[0])["Id"].ToString())).ShowDialog();
+                (new AddTransaction()).ShowDialog();
             }
             catch { }
             finally
