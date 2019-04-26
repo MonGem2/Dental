@@ -41,6 +41,7 @@ namespace Dental
             }
             else
             {
+                Price.Text.Replace('.', ',');
                 string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
                 SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                 _con.Open();

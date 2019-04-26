@@ -42,6 +42,7 @@ namespace Dental
             }
             else
             {
+                Price.Text.Replace('.', ',');
                 try
                 {
                     string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
