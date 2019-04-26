@@ -62,6 +62,30 @@ namespace Dental
                 (new AddDepth()).ShowDialog();
             }
             catch { }
+            finally
+            {
+                string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+                SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                try
+                {
+                    _con.Open();
+                    string query = "select * from [Depth]";
+                    SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                    _cmd.ExecuteNonQuery();
+
+                    SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+                    DataTable _dt = new DataTable();
+                    _adp.Fill(_dt);
+                    View.ItemsSource = _dt.DefaultView;
+                    _adp.Update(_dt);
+
+                    _con.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

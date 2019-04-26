@@ -61,6 +61,30 @@ namespace Dental
                 (new AddTransaction(((DataRowView)View.SelectedItems[0])["Id"].ToString())).ShowDialog();
             }
             catch { }
+            finally
+            {
+                string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+                SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                try
+                {
+                    _con.Open();
+                    string query = "select * from [Transactions]";
+                    SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                    _cmd.ExecuteNonQuery();
+
+                    SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+                    DataTable _dt = new DataTable();
+                    _adp.Fill(_dt);
+                    View.ItemsSource = _dt.DefaultView;
+                    _adp.Update(_dt);
+
+                    _con.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
