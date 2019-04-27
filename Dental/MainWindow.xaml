@@ -27,7 +27,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="Регистратура" Foreground="#FF090068" FontSize="16"/>
                     <Button Content="Пациенты" Foreground="#FF090068" Grid.Row="1" HorizontalContentAlignment="Left" Background="WhiteSmoke" BorderThickness="0" Click="Patients_Click"/>
-                    <Button Content="Добавить карточку" Foreground="#FF090068" Grid.Row="2" HorizontalContentAlignment="Left" Background="WhiteSmoke" BorderThickness="0" Click="AddCard_Click"/>
+                    <Button Content="Новая карточка" Foreground="#FF090068" Grid.Row="2" HorizontalContentAlignment="Left" Background="WhiteSmoke" BorderThickness="0" Click="AddCard_Click"/>
                 </Grid>
             </StackPanel>
             <StackPanel Margin="0,90,0,200" Background="WhiteSmoke">

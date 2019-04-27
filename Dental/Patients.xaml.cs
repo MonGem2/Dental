@@ -62,81 +62,83 @@ namespace Dental
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            try
+            MessageBoxResult dialogResult = MessageBox.Show("Sure", "Some Title", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
             {
-                DataRowView row = (DataRowView)View.SelectedItems[0];
-
-                SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
                 try
                 {
-                    _con.Open();
-                    string query = $"Delete from [Patients] where Id='{ row["id"]}'";
-                    SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                    _cmd.ExecuteNonQuery();
+                    DataRowView row = (DataRowView)View.SelectedItems[0];
 
-                    _con.Close();
-
-                    SQLiteConnection _con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    _con1.Open();
-                    string query1 = $"Delete from [Treatment] where id_Patient='{ row["id"]}'";
-                    SQLiteCommand _cmd1 = new SQLiteCommand(query1, _con1);
-                    _cmd1.ExecuteNonQuery();
-
-                    _con1.Close();
-
-                    SQLiteConnection _con2 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    _con2.Open();
-                    string query2 = $"Delete from [Depth] where id_Patient='{ row["id"]}'";
-                    SQLiteCommand _cmd2 = new SQLiteCommand(query2, _con2);
-                    _cmd2.ExecuteNonQuery();
-
-                    _con2.Close();
-
-                    SQLiteConnection _con3 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    _con3.Open();
-                    string query3 = $"Delete from [Transactions] where id_Patient='{ row["id"]}'";
-                    SQLiteCommand _cmd3 = new SQLiteCommand(query3, _con3);
-                    _cmd3.ExecuteNonQuery();
-
-                    _con3.Close();
-                }
-                catch
-                {
-                }
-                finally {
+                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                     try
                     {
                         _con.Open();
-                        string query = "select * from [Patients]";
+                        string query = $"Delete from [Patients] where Id='{ row["id"]}'";
                         SQLiteCommand _cmd = new SQLiteCommand(query, _con);
                         _cmd.ExecuteNonQuery();
 
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable("tbl_user");
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
                         _con.Close();
+
+                        SQLiteConnection _con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                        _con1.Open();
+                        string query1 = $"Delete from [Treatment] where id_Patient='{ row["id"]}'";
+                        SQLiteCommand _cmd1 = new SQLiteCommand(query1, _con1);
+                        _cmd1.ExecuteNonQuery();
+
+                        _con1.Close();
+
+                        SQLiteConnection _con2 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                        _con2.Open();
+                        string query2 = $"Delete from [Depth] where id_Patient='{ row["id"]}'";
+                        SQLiteCommand _cmd2 = new SQLiteCommand(query2, _con2);
+                        _cmd2.ExecuteNonQuery();
+
+                        _con2.Close();
+
+                        SQLiteConnection _con3 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                        _con3.Open();
+                        string query3 = $"Delete from [Transactions] where id_Patient='{ row["id"]}'";
+                        SQLiteCommand _cmd3 = new SQLiteCommand(query3, _con3);
+                        _cmd3.ExecuteNonQuery();
+
+                        _con3.Close();
                     }
                     catch
                     {
                     }
-                    
+                    finally
+                    {
+                        try
+                        {
+                            _con.Open();
+                            string query = "select * from [Patients]";
+                            SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                            _cmd.ExecuteNonQuery();
+
+                            SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+                            DataTable _dt = new DataTable("tbl_user");
+                            _adp.Fill(_dt);
+                            View.ItemsSource = _dt.DefaultView;
+                            _adp.Update(_dt);
+
+                            _con.Close();
+                        }
+                        catch
+                        {
+                        }
+
+                    }
                 }
+                catch { }
             }
-            catch{ }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            textb.Text.ToLower();
             string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
 
-            switch (current)
-            {
-                case 0:
-                {
                     SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                     try
                     {
@@ -144,35 +146,7 @@ namespace Dental
                         string query = "select * from [Patients]";
                         if (textb.Text != "") // Note: txt_Search is the TextBox..
                         {
-                            query += $" where Name Like '%{textb.Text}%'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
-
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable("tbl_user");
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
-                }
-                case 1:
-                {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Patients]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where Surname Like '%{textb.Text}%'";
+                            query += $" where CardNum Like '@{textb.Text}@' or where Description Like '@{textb.Text}@' or where Mobile_Phone Like '%{textb.Text}%' or Home_Phone Like '%{textb.Text}%' or  Work_Phone Like '%{textb.Text}%' or where FatherName Like '%{textb.Text}%' or where Surname Like '%{textb.Text}%' or where Name Like '%{textb.Text}%'";
                         }
                         SQLiteCommand _cmd = new SQLiteCommand(query, _con);
                         _cmd.ExecuteNonQuery();
@@ -189,126 +163,6 @@ namespace Dental
                     {
                         MessageBox.Show(ex.Message);
                     }
-                    break;
-                }
-                case 2:
-                {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Patients]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where FatherName Like '%{textb.Text}%'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
-
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable();
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
-                }
-                case 3:
-                {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Patients]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where Mobile_Phone Like '%{textb.Text}%' or Home_Phone Like '%{textb.Text}%' or  Work_Phone Like '%{textb.Text}%'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
-
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable();
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
-                }
-                case 4:
-                {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Patients]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where Description Like '@{textb.Text}@'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
-
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable();
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
-                }
-                case 5:
-                {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Patients]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where CardNum Like '@{textb.Text}@'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
-
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable();
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
-                }
-            }
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            current = combo.SelectedIndex;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -327,6 +181,30 @@ namespace Dental
                 (new AddTreatment(((DataRowView)View.SelectedItems[0])["Id"].ToString())).ShowDialog();
             }
             catch { }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            textb.Text = string.Empty;
+        }
+
+        private void View_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.NavigationService.Navigate(new Card(((DataRowView)View.SelectedItems[0])["Name"].ToString(), ((DataRowView)View.SelectedItems[0])["Surname"].ToString(), ((DataRowView)View.SelectedItems[0])["FatherName"].ToString(), ((DataRowView)View.SelectedItems[0])["Id"].ToString()));
+            }
+            catch { }
+        }
+
+        private void AddCard_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.NavigationService.Navigate(new New_Card());
+            }
+            catch { }
+            
         }
     }
 }

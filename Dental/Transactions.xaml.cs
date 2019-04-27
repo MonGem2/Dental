@@ -90,10 +90,7 @@ namespace Dental
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            switch (current)
-            {
-                case 0:
-                {
+            textb.Text.ToLower();
                     SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                     try
                     {
@@ -101,36 +98,7 @@ namespace Dental
                         string query = "select * from [Transactions]";
                         if (textb.Text != "") // Note: txt_Search is the TextBox..
                         {
-                            query += $" where id_Patient Like '%{textb.Text}%'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
-
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable("tbl_user");
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    break;
-                }
-               
-                case 1:
-                {
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Transactions]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where Description Like '@{textb.Text}@'";
+                            query += $" where Description Like '@{textb.Text}@' or where id_Patient Like '%{textb.Text}%' or where Suma Like '%{textb.Text}%' or where Type Like '%{textb.Text}%'";
                         }
                         SQLiteCommand _cmd = new SQLiteCommand(query, _con);
                         _cmd.ExecuteNonQuery();
@@ -147,14 +115,20 @@ namespace Dental
                     {
                         MessageBox.Show(ex.Message);
                     }
-                    break;
-                }
-            }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void View_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            current = combo.SelectedIndex;
+            try
+            {
+                this.NavigationService.Navigate(new Card(((DataRowView)View.SelectedItems[0])["Id"].ToString()));
+            }
+            catch { }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            textb.Text = string.Empty;
         }
     }
 }

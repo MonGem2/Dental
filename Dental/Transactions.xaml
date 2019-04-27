@@ -53,21 +53,14 @@
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="5" SelectionChanged="ComboBox_SelectionChanged" Name="combo">
-                    <ComboBoxItem>
-                        По номеру пациента
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        По описанию
-                    </ComboBoxItem>
-                </ComboBox>
-                <TextBox Grid.Column="4" Style="{StaticResource MyWaterMarkStyle}" Tag="Search" Name="textb" TextChanged="TextBox_TextChanged">
+                <TextBox Grid.Column="4" Style="{StaticResource MyWaterMarkStyle}" Grid.ColumnSpan="2" Tag="Search" Name="textb" TextChanged="TextBox_TextChanged">
                 </TextBox>
+                <Button Grid.Column="5" HorizontalAlignment="Right" Width="25" Background="White" BorderThickness="0" Content="⨉" Click="Button_Click_2"/>
                 <Button Content="Добавить транзакцию" Grid.Column="3" Click="Button_Click_1" Height="25" VerticalAlignment="Top"/>
                 <Button Content="⨉" Grid.Column="6" Background="IndianRed" Click="Button_Click"/>
             </Grid>
         </StackPanel>
-        <DataGrid Grid.Row="1" Name="View" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1" Name="View" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" MouseDoubleClick="View_MouseDoubleClick">
         </DataGrid>
     </Grid>
 </Page>

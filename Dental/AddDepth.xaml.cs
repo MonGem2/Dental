@@ -24,6 +24,7 @@ namespace Dental
         public AddDepth()
         {
             InitializeComponent();
+            Date.SelectedDate = DateTime.Today;
         }
         string id_Patient;
         public AddDepth(string id_Patient)
@@ -53,6 +54,15 @@ namespace Dental
                     _cmd.ExecuteNonQuery();
 
                     _con.Close();
+
+
+                    SQLiteConnection _con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                    _con1.Open();
+                    string query1 = $"insert into [Transactions] (Suma,Description,id_Patient,Date,Type) values ('{Price.Text}','{Descr.Text}','{Id_Pat.Text}','{Date.Text}','Добавлен долг')";
+                    SQLiteCommand _cmd1 = new SQLiteCommand(query1, _con1);
+                    _cmd1.ExecuteNonQuery();
+
+                    _con1.Close();
                     this.Close();
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }

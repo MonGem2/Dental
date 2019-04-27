@@ -24,6 +24,7 @@ namespace Dental
         public AddTreatment()
         {
             InitializeComponent();
+            Date.SelectedDate = DateTime.Today;
         }
         string id_Patient;
         public AddTreatment(string id_Patient)
@@ -59,6 +60,14 @@ namespace Dental
                 _cmd1.ExecuteNonQuery();
 
                 _con1.Close();
+
+                SQLiteConnection _con2 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                _con2.Open();
+                string query1 = $"insert into [Transactions] (Suma,Description,id_Patient,Date,Type) values ('{Price.Text}','{Descr.Text}','{id_Patient}','{Date.Text}','Добавлен долг на лечение')";
+                SQLiteCommand _cmd2 = new SQLiteCommand(query1, _con2);
+                _cmd2.ExecuteNonQuery();
+
+                _con2.Close();
 
                 this.Close();
             }

@@ -90,62 +90,67 @@ namespace Dental
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            try
+            MessageBoxResult dialogResult = MessageBox.Show("Sure", "Some Title", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
             {
-                DataRowView row = (DataRowView)View.SelectedItems[0];
-
-                SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
                 try
                 {
-                    
-                    double sum = (double)row["Suma"];
-                    SQLiteConnection _con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    _con1.Open();
-                    string query1 = $"insert into [Transactions] (Suma,Description,id_Patient,Date) values ('{sum.ToString()}','{row["Description"].ToString()}','{row["id_Patient"].ToString()}','{row["Date"].ToString()}')";
-                    SQLiteCommand _cmd1 = new SQLiteCommand(query1, _con1);
-                    _cmd1.ExecuteNonQuery();
+                    DataRowView row = (DataRowView)View.SelectedItems[0];
 
-                    _con1.Close();
-
-
-                    _con.Open();
-                    string query = $"Delete from [Depth] where Id='{ row["id"]}'";
-                    SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                    _cmd.ExecuteNonQuery();
-
-                    _con.Close();
-
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
+                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                     try
                     {
+
+                        double sum = (double)row["Suma"];
+                        SQLiteConnection _con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                        _con1.Open();
+                        string query1 = $"insert into [Transactions] (Suma,Description,id_Patient,Date,Type) values ('{sum.ToString()}','{row["Description"].ToString()}','{row["id_Patient"].ToString()}','{row["Date"].ToString()}','Погашение долга')";
+                        SQLiteCommand _cmd1 = new SQLiteCommand(query1, _con1);
+                        _cmd1.ExecuteNonQuery();
+
+                        _con1.Close();
+
+
                         _con.Open();
-                        string query = "select * from [Depth]";
+                        string query = $"Delete from [Depth] where Id='{ row["id"]}'";
                         SQLiteCommand _cmd = new SQLiteCommand(query, _con);
                         _cmd.ExecuteNonQuery();
 
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable("tbl_user");
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
-
                         _con.Close();
+
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
+                    finally
+                    {
+                        try
+                        {
+                            _con.Open();
+                            string query = "select * from [Depth]";
+                            SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                            _cmd.ExecuteNonQuery();
 
+                            SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+                            DataTable _dt = new DataTable("tbl_user");
+                            _adp.Fill(_dt);
+                            View.ItemsSource = _dt.DefaultView;
+                            _adp.Update(_dt);
+
+                            _con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+
+                    }
                 }
+                catch { }
             }
-            catch { }
+            
         }
     }
 }

@@ -24,6 +24,7 @@ namespace Dental
         public AddTransaction()
         {
             InitializeComponent();
+            Date.SelectedDate = DateTime.Today;
         }
         string id_Patient;
         public AddTransaction(string id_Patient)
