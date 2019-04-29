@@ -77,6 +77,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPered.xaml.cs">
+      <DependentUpon>AddPered.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddDepth.xaml.cs">
       <DependentUpon>AddDepth.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,10 @@
     <Compile Include="Transactions.xaml.cs">
       <DependentUpon>Transactions.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddPered.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="AddDepth.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

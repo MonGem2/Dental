@@ -56,7 +56,7 @@
                 <TextBox Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource MyWaterMarkStyle}" Tag="Search" TextChanged="TextBox_TextChanged" Name="textb">
                     
                 </TextBox>
-                <Button Grid.Column="5" HorizontalAlignment="Right" Width="20" Background="White" BorderThickness="0" Content="⨉" Click="Button_Click_4"/>
+                <Button Grid.Column="5" HorizontalAlignment="Right" Width="20" VerticalAlignment="Center" Background="White" BorderThickness="0" Content="⨉" Click="Button_Click_4" Margin="0,0,1,0"/>
                 <Button Content="Открыть карточку" Grid.Column="1" Click="Button_Click_2"/>
                 <Button Content="Добавить лечение" Grid.Column="2" Click="Button_Click_3"/>
                 <Button Content="Удалить пациента" Grid.Column="3" Click="Button_Click_1" Height="25" VerticalAlignment="Bottom"/>
@@ -64,7 +64,7 @@
                 <Button Content="Новая карточка" Grid.Row="2" HorizontalContentAlignment="Center" Click="AddCard_Click"/>
             </Grid>
         </StackPanel>
-        <DataGrid Grid.Row="1" Name="View" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" MouseDoubleClick="View_MouseDoubleClick">
+        <DataGrid Grid.Row="1" Name="View" CanUserAddRows="False" CanUserDeleteRows="False" MouseDoubleClick="View_MouseDoubleClick">
         </DataGrid>
     </Grid>
 </Page>

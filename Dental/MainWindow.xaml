@@ -10,12 +10,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="200*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1" ShowGridLines="True">
+        <Grid Grid.Row="1" ShowGridLines="True" Name="grid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="35*"/>
             </Grid.ColumnDefinitions>
-            <Frame Grid.Column="1" Name="Pager" Content=""/>
             <StackPanel Margin="0,0,0,250" Background="WhiteSmoke">
                 <Grid Background="WhiteSmoke">
                     <Grid.RowDefinitions>

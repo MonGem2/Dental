@@ -25,12 +25,13 @@ namespace Dental
         public New_Card()
         {
             InitializeComponent();
+            var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            (this).NavigationService.GoBack();
-            (this).NavigationService.RemoveBackEntry();
+            var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
+            MainWindow.Pager.Items.Remove(t.First());
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -50,8 +51,8 @@ namespace Dental
 
                 _con.Close();
 
-                (this).NavigationService.GoBack();
-                (this).NavigationService.RemoveBackEntry();
+                var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
+                MainWindow.Pager.Items.Remove(t.First());
             }
         }
     }

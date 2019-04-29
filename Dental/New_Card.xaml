@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Dental"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Долги/Предоплаты">
+      Title="Новая карточка">
     <Page.Resources>
         <Style x:Key="MyWaterMarkStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Template">

@@ -50,8 +50,7 @@ namespace Dental
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            (this).NavigationService.GoBack();
-            (this).NavigationService.RemoveBackEntry();
+            MainWindow.Pager.Items.Remove(MainWindow.tb3);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -119,11 +118,66 @@ namespace Dental
 
         private void View_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+            string tmp = string.Empty;
+            string text = $"Select [Name] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
             try
             {
-                this.NavigationService.Navigate(new Card(((DataRowView)View.SelectedItems[0])["Id"].ToString()));
+                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                con.Open();
+                SQLiteCommand comand = new SQLiteCommand(text, con);
+                SQLiteDataReader dataReader = comand.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    tmp = "Карточка:" + dataReader.GetString(0) + " ";
+                }
+                con.Dispose();
             }
-            catch { }
+            catch
+            {
+
+            }
+
+            text = $"Select [Surname] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+            try
+            {
+                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                con.Open();
+                SQLiteCommand comand = new SQLiteCommand(text, con);
+                SQLiteDataReader dataReader = comand.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    tmp += dataReader.GetString(0) + " ";
+                }
+                con.Dispose();
+            }
+            catch
+            {
+
+            }
+
+            text = $"Select [FatherName] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+            try
+            {
+                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                con.Open();
+                SQLiteCommand comand = new SQLiteCommand(text, con);
+                SQLiteDataReader dataReader = comand.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    tmp += dataReader.GetString(0) + " ";
+                }
+                con.Dispose();
+            }
+            catch
+            {
+
+            }
+
+
+            TabItem tb = new TabItem() { Header=tmp, Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["Id"].ToString()) } };
+            MainWindow.Pager.Items.Add(tb);
+            MainWindow.Pager.SelectedItem = tb;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

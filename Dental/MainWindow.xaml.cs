@@ -20,26 +20,49 @@ namespace Dental
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static TabControl Pager = new TabControl() { Name="Pager", TabStripPlacement = Dock.Bottom, Margin = new Thickness(0,0,0,3) };
+        public static TabItem tb = new TabItem() { Name = "Patients", Header = "Пациенты", Content = new Frame() { Content = new Patients() } };
+        public static TabItem tb1 = new TabItem() { Name = "NewCard", Header = "Новая карточка", Content = new Frame() { Content = new New_Card() } };
+        public static TabItem tb2 = new TabItem() { Name = "Depth", Header = "Долги/Предоплаты", Content = new Frame() { Content = new Depth() } };
+        public static TabItem tb3 = new TabItem() { Name = "Transactions", Header = "Транзакции", Content = new Frame() { Content = new Transactions() } };
         public MainWindow()
         {
             InitializeComponent();
+            grid.Children.Add(Pager);
+            Grid.SetColumn(Pager, 1);
         }
 
         private void Patients_Click(object sender, RoutedEventArgs e)
         {
-            Pager.Content = new Patients();
+            if (!Pager.Items.Contains(tb))
+            {
+                Pager.Items.Add((tb));
+            }
+            Pager.SelectedItem = tb;
         }
         private void AddCard_Click(object sender, RoutedEventArgs e)
         {
-            Pager.Content = new New_Card();
+            if (!Pager.Items.Contains(tb1))
+            {
+                Pager.Items.Add((tb1));
+            }
+            Pager.SelectedItem = tb1;
         }
         private void Depth_Click(object sender, RoutedEventArgs e)
         {
-            Pager.Content = new Depth();
+            if (!Pager.Items.Contains(tb2))
+            {
+                Pager.Items.Add((tb2));
+            }
+            Pager.SelectedItem = tb2;
         }
         private void Transaction_Click(object sender, RoutedEventArgs e)
         {
-            Pager.Content = new Transactions();
+            if (!Pager.Items.Contains(tb3))
+            {
+                Pager.Items.Add((tb3));
+            }
+            Pager.SelectedItem = tb3;
         }
     }
 }

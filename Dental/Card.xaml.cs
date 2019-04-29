@@ -33,6 +33,12 @@ namespace Dental
         {
             InitializeComponent();
             Title = "Карточка: " + Surname + "  " + Name + "  " + FatherName;
+            var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
+            try
+            {
+                t.First().Header = Title;
+            }
+            catch{ }
             names.Text += Surname +"  "+ Name +"  "+ FatherName;
             Id = id;
 
@@ -215,7 +221,7 @@ namespace Dental
         {
             InitializeComponent();
             Id = id;
-
+            var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
             string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
 
             string text = $"Select [Name] From [Patients] where Id='{id}'";
@@ -227,7 +233,14 @@ namespace Dental
                 SQLiteDataReader dataReader = comand.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    Title="Карточка:" + dataReader.GetString(0) + " ";
+                    if (string.IsNullOrEmpty(Title))
+                    {
+                        Title = "Карточка:" + dataReader.GetString(0) + " ";
+                    }
+                    else
+                    {
+                        Title += dataReader.GetString(0) + " ";
+                    }
                     names.Text += dataReader.GetString(0)+" ";
                 }
                 con.Dispose();
@@ -236,7 +249,6 @@ namespace Dental
             {
 
             }
-
 
             text = $"Select [Surname] From [Patients] where Id='{id}'";
             try
@@ -453,8 +465,8 @@ namespace Dental
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            (this).NavigationService.GoBack();
-            (this).NavigationService.RemoveBackEntry();
+            var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
+            MainWindow.Pager.Items.Remove(t.First());
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
