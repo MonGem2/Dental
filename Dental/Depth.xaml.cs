@@ -104,12 +104,13 @@ namespace Dental
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
             if (View.SelectedItems.Count!=0)
             {
-                MessageBoxResult dialogResult = MessageBox.Show("Вы действительно хотите погасить этот долг?", "Подтверждение", MessageBoxButton.YesNo);
+                MessageBoxResult dialogResult = MessageBox.Show("Вы хотите полностью погасить этот долг?", "Подтверждение", MessageBoxButton.YesNoCancel);
                 if (dialogResult == MessageBoxResult.Yes)
                 {
-                    string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
                     try
                     {
                         DataRowView row = (DataRowView)View.SelectedItems[0];
@@ -165,6 +166,38 @@ namespace Dental
                         }
                     }
                     catch { }
+                }
+                if (dialogResult == MessageBoxResult.No)
+                {
+                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                    try {
+                        DataRowView row = (DataRowView)View.SelectedItems[0];
+                        (new Depther(double.Parse(row["Suma"].ToString()),row["Id"].ToString(),int.Parse(row["id_Patient"].ToString()))).ShowDialog();
+                        }
+                    catch { }
+                    finally
+                    {
+                        try
+                        {
+                            _con.Open();
+                            string query = "select * from [Depth]";
+                            SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                            _cmd.ExecuteNonQuery();
+
+                            SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+                            DataTable _dt = new DataTable("tbl_user");
+                            _adp.Fill(_dt);
+                            View.ItemsSource = _dt.DefaultView;
+                            _adp.Update(_dt);
+
+                            _con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+
+                    }
                 }
             }
         }
@@ -273,7 +306,7 @@ namespace Dental
         {
             string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
             string tmp = string.Empty;
-            string text = $"Select [Name] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+            string text = $"Select [Name] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["id_Patient"].ToString()}'";
             try
             {
                 SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
@@ -291,7 +324,7 @@ namespace Dental
 
             }
 
-            text = $"Select [Surname] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+            text = $"Select [Surname] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["id_Patient"].ToString()}'";
             try
             {
                 SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
@@ -309,7 +342,7 @@ namespace Dental
 
             }
 
-            text = $"Select [FatherName] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+            text = $"Select [FatherName] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["id_Patient"].ToString()}'";
             try
             {
                 SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
@@ -328,7 +361,7 @@ namespace Dental
             }
 
 
-            TabItem tb = new TabItem() { Header = tmp, Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["Id"].ToString()) } };
+            TabItem tb = new TabItem() { Header = tmp, Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["id_Patient"].ToString()) } };
             MainWindow.Pager.Items.Add(tb);
             MainWindow.Pager.SelectedItem = tb;
         }
@@ -339,7 +372,7 @@ namespace Dental
         {
             string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
             string tmp = string.Empty;
-            string text = $"Select [Name] From [Patients] where Id='{((DataRowView)View1.SelectedItems[0])["Id"].ToString()}'";
+            string text = $"Select [Name] From [Patients] where Id='{((DataRowView)View1.SelectedItems[0])["id_Patient"].ToString()}'";
             try
             {
                 SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
@@ -357,7 +390,7 @@ namespace Dental
 
             }
 
-            text = $"Select [Surname] From [Patients] where Id='{((DataRowView)View1.SelectedItems[0])["Id"].ToString()}'";
+            text = $"Select [Surname] From [Patients] where Id='{((DataRowView)View1.SelectedItems[0])["id_Patient"].ToString()}'";
             try
             {
                 SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
@@ -375,7 +408,7 @@ namespace Dental
 
             }
 
-            text = $"Select [FatherName] From [Patients] where Id='{((DataRowView)View1.SelectedItems[0])["Id"].ToString()}'";
+            text = $"Select [FatherName] From [Patients] where Id='{((DataRowView)View1.SelectedItems[0])["id_Patient"].ToString()}'";
             try
             {
                 SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
@@ -394,7 +427,7 @@ namespace Dental
             }
 
 
-            TabItem tb = new TabItem() { Header = tmp, Content = new Frame() { Content = new Card(((DataRowView)View1.SelectedItems[0])["Id"].ToString()) } };
+            TabItem tb = new TabItem() { Header = tmp, Content = new Frame() { Content = new Card(((DataRowView)View1.SelectedItems[0])["id_Patient"].ToString()) } };
             MainWindow.Pager.Items.Add(tb);
             MainWindow.Pager.SelectedItem = tb;
         }

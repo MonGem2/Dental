@@ -41,6 +41,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="10*"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <Grid Height="25" Background="White">
@@ -64,7 +65,8 @@
                 <Button Content="Новая карточка" Grid.Row="2" HorizontalContentAlignment="Center" Click="AddCard_Click"/>
             </Grid>
         </StackPanel>
-        <DataGrid Grid.Row="1" Name="View" CanUserAddRows="False" CanUserDeleteRows="False" MouseDoubleClick="View_MouseDoubleClick">
+        <DataGrid Grid.Row="1" Name="View" CanUserAddRows="False" CanUserDeleteRows="False" MouseDoubleClick="View_MouseDoubleClick" KeyDown="View_KeyDown">
         </DataGrid>
+        <Label Grid.Row="2" Content="Чтобы принять изменения нажмите Enter; Чтобы сохранить изменения выбранного пациента нажмите Ctrl+F5(только после принятия изменений); Чтобы обновить таблицу нажмите F5" FontSize="9"/>
     </Grid>
 </Page>

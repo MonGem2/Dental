@@ -36,7 +36,6 @@ namespace Dental
         {
             string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
             string text = "Select * From [Patients]";
-            // MessageBox.Show(path);
             SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
             try
             {
@@ -209,50 +208,112 @@ namespace Dental
             MainWindow.Pager.SelectedItem = tb;
         }
 
-        
-        
-        //private void View_SourceUpdated(object sender, EventArgs e)
-        //{
-        //    string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-
-        //    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-        //    try
-        //    {
-
-        //    _con.Open();
-        //    using (SQLiteTransaction tr = _con.BeginTransaction())
-        //    {
-        //        using (SQLiteCommand command = _con.CreateCommand())
-        //        {
-        //            command.Transaction = tr;
-        //            command.CommandText =
-        //                $"update Patients set Name = '{((DataRowView)View.SelectedItems[0])["Name"].ToString()}', Surname = '{((DataRowView)View.SelectedItems[0])["Surname"].ToString()}', FatherName = '{((DataRowView)View.SelectedItems[0])["FatherName"].ToString()}', Mobile_Phone = '{((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString()}', Home_Phone = '{((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString()}', Work_Phone = '{((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString()}', Date_Birth = '{((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString()}', Gender = '{((DataRowView)View.SelectedItems[0])["Gender"].ToString()}', Card_Num = '{((DataRowView)View.SelectedItems[0])["Card_Num"].ToString()}', Description = '{((DataRowView)View.SelectedItems[0])["Description"].ToString()}', Date = '{((DataRowView)View.SelectedItems[0])["Date"].ToString()}' where Id = '{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
-        //            MessageBox.Show(((DataRowView)View.SelectedItems[0])["Surname"].ToString());
-        //            command.ExecuteNonQuery();
-
-        //            // command.CommandText =
-        //            //    $"update Patients set Name = '{((DataRowView)View.SelectedItems[0])["Name"].ToString()}', Surname = '{((DataRowView)View.SelectedItems[0])["Surname"].ToString()}', FatherName = '{((DataRowView)View.SelectedItems[0])["FatherName"].ToString()}', Mobile_Phone = '{((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString()}', Home_Phone = '{((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString()}', Work_Phone = '{((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString()}', Date_Birth = '{((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString()}', Gender = '{((DataRowView)View.SelectedItems[0])["Gender"].ToString()}', Card_Num = '{((DataRowView)View.SelectedItems[0])["Card_Num"].ToString()}', Description = '{((DataRowView)View.SelectedItems[0])["Description"].ToString()}', Date = '{((DataRowView)View.SelectedItems[0])["Date"].ToString()}' where Id = '{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
 
 
-        //        }
-        //        tr.Commit();
-        //    }
-        //    //string query = $"Update [Patients] set [Name]='{((DataRowView)View.SelectedItems[0])["Name"].ToString()}', [Surname]='{((DataRowView)View.SelectedItems[0])["Surname"].ToString()}', [FatherName]='{((DataRowView)View.SelectedItems[0])["FatherName"].ToString()}', [Mobile_Phone]='{((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString()}', [Work_Phone]='{((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString()}', [Home_Phone]='{((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString()}', [Date_Birth]='{((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString()}', [Gender]='{((DataRowView)View.SelectedItems[0])["Gender"].ToString()}', [Card_Num]='{((DataRowView)View.SelectedItems[0])["Card_Num"]}', [Description]='{((DataRowView)View.SelectedItems[0])["Description"].ToString()}', [Date]='{((DataRowView)View.SelectedItems[0])["Date"].ToString()}' where Id = '{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
-        //    //SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-        //    //_cmd.ExecuteNonQuery();
+        private void View_SourceUpdated(object sender, EventArgs e)
+        {
+            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
 
-        //    //SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-        //    //DataTable _dt = new DataTable();
-        //    //_adp.Fill(_dt);
-        //    //View.ItemsSource = _dt.DefaultView;
-        //    //_adp.Update(_dt);
+            SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+            try
+            {
 
-        //    _con.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //       // MessageBox.Show(ex.Message);
-        //    }
-        //}
+                _con.Open();
+                using (SQLiteTransaction tr = _con.BeginTransaction())
+                {
+                    using (SQLiteCommand command = _con.CreateCommand())
+                    {
+                        command.Transaction = tr;
+                        command.CommandText =
+                            $"update Patients set Name = '{((DataRowView)View.SelectedItems[0])["Name"].ToString()}', Surname = '{((DataRowView)View.SelectedItems[0])["Surname"].ToString()}', FatherName = '{((DataRowView)View.SelectedItems[0])["FatherName"].ToString()}', Mobile_Phone = '{((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString()}', Home_Phone = '{((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString()}', Work_Phone = '{((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString()}', Date_Birth = '{((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString()}', Gender = '{((DataRowView)View.SelectedItems[0])["Gender"].ToString()}', Card_Num = '{((DataRowView)View.SelectedItems[0])["Card_Num"].ToString()}', Description = '{((DataRowView)View.SelectedItems[0])["Description"].ToString()}', Date = '{((DataRowView)View.SelectedItems[0])["Date"].ToString()}' where Id = '{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+                        MessageBox.Show(((DataRowView)View.SelectedItems[0])["Surname"].ToString());
+                        command.ExecuteNonQuery();
+
+                        // command.CommandText =
+                        //    $"update Patients set Name = '{((DataRowView)View.SelectedItems[0])["Name"].ToString()}', Surname = '{((DataRowView)View.SelectedItems[0])["Surname"].ToString()}', FatherName = '{((DataRowView)View.SelectedItems[0])["FatherName"].ToString()}', Mobile_Phone = '{((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString()}', Home_Phone = '{((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString()}', Work_Phone = '{((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString()}', Date_Birth = '{((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString()}', Gender = '{((DataRowView)View.SelectedItems[0])["Gender"].ToString()}', Card_Num = '{((DataRowView)View.SelectedItems[0])["Card_Num"].ToString()}', Description = '{((DataRowView)View.SelectedItems[0])["Description"].ToString()}', Date = '{((DataRowView)View.SelectedItems[0])["Date"].ToString()}' where Id = '{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+
+
+                    }
+                    tr.Commit();
+                }
+                //string query = $"Update [Patients] set [Name]='{((DataRowView)View.SelectedItems[0])["Name"].ToString()}', [Surname]='{((DataRowView)View.SelectedItems[0])["Surname"].ToString()}', [FatherName]='{((DataRowView)View.SelectedItems[0])["FatherName"].ToString()}', [Mobile_Phone]='{((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString()}', [Work_Phone]='{((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString()}', [Home_Phone]='{((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString()}', [Date_Birth]='{((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString()}', [Gender]='{((DataRowView)View.SelectedItems[0])["Gender"].ToString()}', [Card_Num]='{((DataRowView)View.SelectedItems[0])["Card_Num"]}', [Description]='{((DataRowView)View.SelectedItems[0])["Description"].ToString()}', [Date]='{((DataRowView)View.SelectedItems[0])["Date"].ToString()}' where Id = '{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+                //SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                //_cmd.ExecuteNonQuery();
+
+                //SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+                //DataTable _dt = new DataTable();
+                //_adp.Fill(_dt);
+                //View.ItemsSource = _dt.DefaultView;
+                //_adp.Update(_dt);
+
+                _con.Close();
+            }
+            catch (Exception ex)
+            {
+                // MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void View_KeyDown(object sender, KeyEventArgs e)
+        {
+            //MessageBox.Show(e.Key.ToString());
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.F5)
+            {
+                string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+
+                SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                try
+                {
+
+                    _con.Open();
+                        using (SQLiteCommand command = new SQLiteCommand(_con))
+                        {
+                            command.CommandText =
+                                $"update Patients set Name = '{((DataRowView)View.SelectedItems[0])["Name"].ToString()}', Surname = '{((DataRowView)View.SelectedItems[0])["Surname"].ToString()}', FatherName = '{((DataRowView)View.SelectedItems[0])["FatherName"].ToString()}', Mobile_Phone = '{((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString()}', Home_Phone = '{((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString()}', Work_Phone = '{((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString()}', Date_Birth = '{((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString()}', Gender = '{((DataRowView)View.SelectedItems[0])["Gender"].ToString()}', Card_Num = '{((DataRowView)View.SelectedItems[0])["Card_Num"].ToString()}', Description = '{((DataRowView)View.SelectedItems[0])["Description"].ToString()}', Date = '{((DataRowView)View.SelectedItems[0])["Date"].ToString()}' where Id = '{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+                            MessageBox.Show(((DataRowView)View.SelectedItems[0])["Surname"].ToString());
+                            command.ExecuteNonQuery();
+
+                            // command.CommandText =
+                            //    $"update Patients set Name = '{((DataRowView)View.SelectedItems[0])["Name"].ToString()}', Surname = '{((DataRowView)View.SelectedItems[0])["Surname"].ToString()}', FatherName = '{((DataRowView)View.SelectedItems[0])["FatherName"].ToString()}', Mobile_Phone = '{((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString()}', Home_Phone = '{((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString()}', Work_Phone = '{((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString()}', Date_Birth = '{((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString()}', Gender = '{((DataRowView)View.SelectedItems[0])["Gender"].ToString()}', Card_Num = '{((DataRowView)View.SelectedItems[0])["Card_Num"].ToString()}', Description = '{((DataRowView)View.SelectedItems[0])["Description"].ToString()}', Date = '{((DataRowView)View.SelectedItems[0])["Date"].ToString()}' where Id = '{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+
+
+                        }
+                    //string query = $"Update [Patients] set [Name]='{((DataRowView)View.SelectedItems[0])["Name"].ToString()}', [Surname]='{((DataRowView)View.SelectedItems[0])["Surname"].ToString()}', [FatherName]='{((DataRowView)View.SelectedItems[0])["FatherName"].ToString()}', [Mobile_Phone]='{((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString()}', [Work_Phone]='{((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString()}', [Home_Phone]='{((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString()}', [Date_Birth]='{((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString()}', [Gender]='{((DataRowView)View.SelectedItems[0])["Gender"].ToString()}', [Card_Num]='{((DataRowView)View.SelectedItems[0])["Card_Num"]}', [Description]='{((DataRowView)View.SelectedItems[0])["Description"].ToString()}', [Date]='{((DataRowView)View.SelectedItems[0])["Date"].ToString()}' where Id = '{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
+                    //SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+                    //_cmd.ExecuteNonQuery();
+
+                    //SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+                    //DataTable _dt = new DataTable();
+                    //_adp.Fill(_dt);
+                    //View.ItemsSource = _dt.DefaultView;
+                    //_adp.Update(_dt);
+
+                    _con.Close();
+                }
+                catch (Exception ex)
+                {
+                     MessageBox.Show(ex.Message);
+                }
+            }
+            else if(e.Key == Key.F5)
+            {
+                string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+                string text = "Select * From [Patients]";
+                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+                try
+                {
+                    con.Open();
+                    DataSet ds = new DataSet();
+                    var da = new SQLiteDataAdapter(text, con);
+                    da.AcceptChangesDuringUpdate = true;
+                    da.Fill(ds);
+                    View.ItemsSource = ds.Tables[0].DefaultView;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }
