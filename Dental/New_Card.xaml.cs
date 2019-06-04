@@ -42,15 +42,8 @@ namespace Dental
             }
             else
             {
-                string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-                SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                _con.Open();
-                string query = $"insert into [Patients] (Name,Surname,FatherName,Gender,Mobile_Phone,Home_Phone,Work_Phone,Date_Birth,Description,Date) values ('{name.Text}','{surname.Text}','{fathername.Text}','{gender.Text}','{mobphone.Text}','{homephone.Text}','{workphone.Text}','{birth.Text}','{descr.Text}','{DateTime.Today.ToShortDateString()}')";
-                SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                _cmd.ExecuteNonQuery();
-
-                _con.Close();
-
+                DatabaseWorker.NewCard(name.Text, surname.Text, fathername.Text, gender.Text, mobphone.Text, homephone.Text, workphone.Text, birth.Text, descr.Text);
+                
                 var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
                 MainWindow.Pager.Items.Remove(t.First());
             }

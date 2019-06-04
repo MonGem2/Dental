@@ -30,6 +30,13 @@ namespace Dental
             InitializeComponent();
             grid.Children.Add(Pager);
             Grid.SetColumn(Pager, 1);
+            this.Closing += MainWindow_Closing;
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DatabaseWorker.Close();
+        
         }
 
         private void Patients_Click(object sender, RoutedEventArgs e)

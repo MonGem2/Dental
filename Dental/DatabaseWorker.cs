@@ -56,5 +56,15 @@ namespace Dental
             }
 
         }
+        public static void NewCard(string name, string surname, string fathername,string gender, string mobphone, string homephone, string workphone, string birth, string descr)
+        {
+            string query = $"insert into [Patients] (Name,Surname,FatherName,Gender,Mobile_Phone,Home_Phone,Work_Phone,Date_Birth,Description,Date) values ('{name}','{surname}','{fathername}','{gender}','{mobphone}','{homephone}','{workphone}','{birth}','{descr}','{DateTime.Today.ToShortDateString()}')";
+            SQLiteCommand _cmd = new SQLiteCommand(query, con);
+            _cmd.ExecuteNonQuery();
+        }
+        public static void Close()
+        {
+            con.Close();
+        }
     }
 }
