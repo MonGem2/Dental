@@ -31,17 +31,18 @@ namespace Dental
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            string text = "Select * From [Transactions]";
-            SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+            //string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+            //string text = "Select * From [Transactions]";
+            //SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
             try
             {
-                con.Open();
-                DataSet ds = new DataSet();
-                var da = new SQLiteDataAdapter(text, con);
-                da.AcceptChangesDuringUpdate = true;
-                da.Fill(ds);
-                View.ItemsSource = ds.Tables[0].DefaultView;
+                //con.Open();
+                //DataSet ds = new DataSet();
+                //var da = new SQLiteDataAdapter(text, con);
+                //da.AcceptChangesDuringUpdate = true;
+                //da.Fill(ds);
+                //View.ItemsSource = ds.Tables[0].DefaultView;
+                View.ItemsSource = DatabaseWorker.SelectTransactions().Tables[0].DefaultView;
             }
             catch (Exception)
             {
@@ -62,58 +63,39 @@ namespace Dental
             catch { }
             finally
             {
-                string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-                SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                try
-                {
-                    _con.Open();
-                    string query = "select * from [Transactions]";
-                    SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                    _cmd.ExecuteNonQuery();
-
-                    SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                    DataTable _dt = new DataTable();
-                    _adp.Fill(_dt);
-                    View.ItemsSource = _dt.DefaultView;
-                    _adp.Update(_dt);
-
-                    _con.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                View.ItemsSource = DatabaseWorker.SelectTransactions().Tables[0].DefaultView;
             }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            textb.Text.ToLower();
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    try
-                    {
-                        _con.Open();
-                        string query = "select * from [Transactions]";
-                        if (textb.Text != "") // Note: txt_Search is the TextBox..
-                        {
-                            query += $" where Description Like '@{textb.Text}@' or where id_Patient Like '%{textb.Text}%' or where Suma Like '%{textb.Text}%' or where Type Like '%{textb.Text}%'";
-                        }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
+            View.ItemsSource = DatabaseWorker.FindTransactions(textb.Text).DefaultView;
+            //string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+            //textb.Text.ToLower();
+            //        SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+            //        try
+            //        {
+            //            _con.Open();
+            //            string query = "select * from [Transactions]";
+            //            if (textb.Text != "") // Note: txt_Search is the TextBox..
+            //            {
+            //                query += $" where Description Like '@{textb.Text}@' or where id_Patient Like '%{textb.Text}%' or where Suma Like '%{textb.Text}%' or where Type Like '%{textb.Text}%'";
+            //            }
+            //            SQLiteCommand _cmd = new SQLiteCommand(query, _con);
+            //            _cmd.ExecuteNonQuery();
 
-                        SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-                        DataTable _dt = new DataTable();
-                        _adp.Fill(_dt);
-                        View.ItemsSource = _dt.DefaultView;
-                        _adp.Update(_dt);
+            //            SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+            //            DataTable _dt = new DataTable();
+            //            _adp.Fill(_dt);
+            //            View.ItemsSource = _dt.DefaultView;
+            //            _adp.Update(_dt);
 
-                        _con.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+            //            _con.Close();
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show(ex.Message);
+            //        }
         }
 
         private void View_MouseDoubleClick(object sender, MouseButtonEventArgs e)
