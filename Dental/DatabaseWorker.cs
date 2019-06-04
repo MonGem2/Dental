@@ -90,5 +90,14 @@ namespace Dental
             _cmd.ExecuteNonQuery();
 
         }
+
+        public static void InsertTreatment(string Price, string Descr, string Id_Pat, string Date)
+        {
+
+            string query = $"insert into [Treatment] (Date,Description,id_Patient,Price) values ('{Date}','{Descr}','{Id_Pat}','{Price}')";
+            SQLiteCommand _cmd = new SQLiteCommand(query, con);
+            _cmd.ExecuteNonQuery();
+
+        }
     }
 }
