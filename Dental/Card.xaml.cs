@@ -32,6 +32,8 @@ namespace Dental
         public Card(string Name,string Surname,string FatherName,string id)
         {
             InitializeComponent();
+            Patient patient = DatabaseWorker.getPatient(id);
+
             Title = "Карточка: " + Surname + "  " + Name + "  " + FatherName;
             var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
             try
@@ -41,181 +43,30 @@ namespace Dental
             catch{ }
             names.Text += Surname +"  "+ Name +"  "+ FatherName;
             Id = id;
+            Info.Text += "Дата создания карты: " + patient.Date + "\n";
+            Info.Text += "Дата рождения: " + patient.Date_Birth + "\n";
+            Info.Text += "Мобильный: " + patient.Mobile_Phone + "\n";
+            Info.Text += "Домашний: " + patient.Home_Phone + "\n";
+            Info.Text += "Робочий: " + patient.Work_Phone + "\n";
+            Info.Text += "Описание: " + patient.Description;
 
-            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
+            Treatment.Text = DatabaseWorker.GetTreatmentString(id);
+            
 
-            string text = $"Select [Date] From [Patients] where Id='{id}'";
-            try
-            {
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    Info.Text += "Дата создания карты: " + dataReader.GetString(0) + "\n";
-                }
-                con.Dispose();
-            }
-            catch (Exception e)
-            {
-                 
-            }
-
-            text = $"Select [Date_Birth] From [Patients] where Id='{id}'";
-            try
-            {
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    Info.Text += "Дата рождения: " + dataReader.GetString(0)+"\n";
-                }
-                con.Dispose();
-            }
-            catch (Exception e)
-            {
-                 
-            }
-
-            text = $"Select [Mobile_Phone] From [Patients] where Id='{id}'";
-            try
-            {
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    Info.Text += "Мобильный: " + dataReader.GetString(0) + "\n";
-                }
-                con.Dispose();
-            }
-            catch (Exception e)
-            {
-                 
-            }
-
-            text = $"Select [Home_Phone] From [Patients] where Id='{id}'";
-            try
-            {
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    Info.Text += "Домашний: " + dataReader.GetString(0) + "\n";
-                }
-                con.Dispose();
-            }
-            catch (Exception e)
-            {
-                 
-            }
-
-            text = $"Select [Work_Phone] From [Patients] where Id='{id}'";
-            try
-            {
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    Info.Text += "Робочий: " + dataReader.GetString(0) + "\n";
-                }
-                con.Dispose();
-            }
-            catch (Exception e)
-            {
-                 
-            }
-
-            text = $"Select [Description] From [Patients] where Id='{id}'";
-            try
-            {
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    Info.Text += "Описание: " + dataReader.GetString(0);
-                }
-                con.Dispose();
-            }
-            catch (Exception e)
-            {
-                 
-            }
-
-            text = $"Select [Date] From [Treatment] where id_Patient='{id}'";
-
-            try
-            {
-                string tmp = string.Empty;
-                string tmp1 = string.Empty;
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    if (dataReader.GetString(0) != tmp)
-                    {
-                        Treatment.Text += "Дата: " + dataReader.GetString(0) + "\n";
-                        text = $"Select [Description] From [Treatment] where id_Patient='{id}' and Date='{dataReader.GetString(0)}'";
-
-                        try
-                        {
-                            SQLiteConnection con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                            con1.Open();
-                            SQLiteCommand comand1 = new SQLiteCommand(text, con1);
-                            SQLiteDataReader dataReader1 = comand1.ExecuteReader();
-                            while (dataReader1.Read())
-                            {
-                                Treatment.Text += "Описание: " + dataReader1.GetString(0) + "\n";
-                                text = $"Select [Price] From [Treatment] where id_Patient='{id}' and Date='{dataReader.GetString(0)}' and Description='{dataReader1.GetString(0)}'";
-
-                                try
-                                {
-                                    SQLiteConnection con2 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                                    con2.Open();
-                                    SQLiteCommand comand2 = new SQLiteCommand(text, con2);
-                                    SQLiteDataReader dataReader2 = comand2.ExecuteReader();
-                                    while (dataReader2.Read())
-                                    {
-                                        Treatment.Text += "Цена: " + dataReader2.GetDouble(0).ToString() + "\n";
-                                    }
-                                    con2.Dispose();
-                                }
-                                catch (Exception e)
-                                {
-                                    MessageBox.Show(e.Message);
-                                }
-                            }
-                            con1.Dispose();
-
-                        }
-                        catch (Exception e)
-                        {
-                             
-                        }
-                    }
-                    tmp = dataReader.GetString(0);
-                }
-                con.Dispose();
-            }
-            catch (Exception e)
-            {
-                 
-            }
+            
         }
 
-
+        public void update()
+        {
+            Patient patient = DatabaseWorker.getPatient(Id);
+            Info.Text += "Дата создания карты: " + patient.Date + "\n";
+            Info.Text += "Дата рождения: " + patient.Date_Birth + "\n";
+            Info.Text += "Мобильный: " + patient.Mobile_Phone + "\n";
+            Info.Text += "Домашний: " + patient.Home_Phone + "\n";
+            Info.Text += "Робочий: " + patient.Work_Phone + "\n";
+            Info.Text += "Описание: " + patient.Description;
+            Treatment.Text = DatabaseWorker.GetTreatmentString(Id);
+        }
 
         public Card(string id)
         {

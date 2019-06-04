@@ -23,7 +23,7 @@ namespace Dental
             string query = "select * from [Transactions]";
             if (pattern != "") // Note: txt_Search is the TextBox..
             {
-                query += $" where Description Like '@{pattern}@' or where id_Patient Like '%{pattern}%' or Suma Like '%{pattern}%' or Type Like '%{pattern}%'";
+                query += $" where Description Like '@{pattern}@' or where id_Patient Like '%{pattern}%' or where Suma Like '%{pattern}%' or where Type Like '%{pattern}%'";
             }
             SQLiteCommand _cmd = new SQLiteCommand(query, con);
             _cmd.ExecuteNonQuery();
@@ -99,5 +99,89 @@ namespace Dental
             _cmd.ExecuteNonQuery();
 
         }
+        public static Patient getPatient(string Id)
+        {
+            Patient patient = new Patient();
+            string text = $"Select [Date],[Date_Birth], [Mobile_Phone], [Home_Phone], [Work_Phone], [Description] From [Patients] where Id='{Id}'";
+            SQLiteCommand comand = new SQLiteCommand(text, con);
+            SQLiteDataReader dataReader = comand.ExecuteReader();
+            while (dataReader.Read())
+            {
+                patient.Date = dataReader.GetString(0);
+                patient.Date_Birth = dataReader.GetString(1);
+                patient.Mobile_Phone = dataReader.GetString(2);
+
+                patient.Home_Phone = dataReader.GetString(3);
+                patient.Work_Phone = dataReader.GetString(4);
+                patient.Description = dataReader.GetString(5);
+            }
+
+            return patient;
+        }
+
+        public static string GetTreatmentString(string id)
+        {
+            string Rez = string.Empty;
+            try
+            {
+                string text = $"Select [Date] From [Treatment] where id_Patient='{id}'";
+                string tmp = string.Empty;
+                string tmp1 = string.Empty;
+                
+                SQLiteCommand comand = new SQLiteCommand(text, con);
+                SQLiteDataReader dataReader = comand.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    if (dataReader.GetString(0) != tmp)
+                    {
+                        
+                        Rez += "Дата: " + dataReader.GetString(0) + "\n";
+                        text = $"Select [Description] From [Treatment] where id_Patient='{id}' and Date='{dataReader.GetString(0)}'";
+
+                        try
+                        {
+                         
+                            SQLiteCommand comand1 = new SQLiteCommand(text, con);
+                            SQLiteDataReader dataReader1 = comand1.ExecuteReader();
+                            while (dataReader1.Read())
+                            {
+                               
+                                Rez += "Описание: " + dataReader1.GetString(0) + "\n";
+                                text = $"Select [Price] From [Treatment] where id_Patient='{id}' and Date='{dataReader.GetString(0)}' and Description='{dataReader1.GetString(0)}'";
+                                try
+                                {                                                                       
+                                    SQLiteCommand comand2 = new SQLiteCommand(text, con);
+                                    SQLiteDataReader dataReader2 = comand2.ExecuteReader();
+                                    while (dataReader2.Read())
+                                    {
+                                        Rez += "Цена: " + dataReader2.GetDouble(0).ToString() + "\n";
+                                    }
+                                    Rez += "\n";
+                                }
+                                catch (Exception e)
+                                {
+                                }
+                            }
+                            
+
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
+                    }
+                    tmp = dataReader.GetString(0);
+                    
+                }
+                
+            }
+            catch (Exception e)
+            {
+
+            }
+            return Rez;
+        }
+
+
     }
 }

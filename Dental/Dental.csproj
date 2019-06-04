@@ -100,6 +100,7 @@
     <Compile Include="New_Card.xaml.cs">
       <DependentUpon>New_Card.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Patient.cs" />
     <Compile Include="Transactions.xaml.cs">
       <DependentUpon>Transactions.xaml</DependentUpon>
     </Compile>
