@@ -66,5 +66,29 @@ namespace Dental
         {
             con.Close();
         }
+        public static void InsertTransaction(string Price, string Descr, string Id_Pat, string Date)
+        {
+
+            string query1 = $"insert into [Transactions] (Suma,Description,id_Patient,Date,Type) values ('{Price}','{Descr}','{Id_Pat}','{Date}','Добавлен долг')";
+            SQLiteCommand _cmd1 = new SQLiteCommand(query1, con);
+            _cmd1.ExecuteNonQuery();
+
+        }
+        public static void InsertDepth(string Price, string Descr, string Id_Pat, string Date)
+        {
+
+            string query = $"insert into [Depth] (Suma,Description,id_Patient,Date) values ('{Price}','{Descr}','{Id_Pat}','{Date}')";
+            SQLiteCommand _cmd = new SQLiteCommand(query, con);
+            _cmd.ExecuteNonQuery();
+
+        }
+        public static void InsertPered(string Price, string Descr, string Id_Pat, string Date)
+        {
+
+            string query = $"insert into [Pered] (Suma,Description,id_Patient,Date) values ('{Price}','{Descr}','{Id_Pat}','{Date}')";
+            SQLiteCommand _cmd = new SQLiteCommand(query, con);
+            _cmd.ExecuteNonQuery();
+
+        }
     }
 }

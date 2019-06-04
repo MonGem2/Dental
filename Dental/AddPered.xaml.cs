@@ -46,15 +46,7 @@ namespace Dental
                 Price.Text.Replace('.', ',');
                 try
                 {
-                    string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                    _con.Open();
-                    string query = $"insert into [Pered] (Suma,Description,id_Patient,Date) values ('{Price.Text}','{Descr.Text}','{Id_Pat.Text}','{Date.Text}')";
-                    SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                    _cmd.ExecuteNonQuery();
-
-                    _con.Close();
-
+                    DatabaseWorker.InsertPered(Price.Text, Descr.Text, Id_Pat.Text, Date.Text);
                     this.Close();
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
