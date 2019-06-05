@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace Dental
 {
-    /// <summary>
-    /// Interaction logic for Transactions.xaml
-    /// </summary>
     public partial class Transactions : Page
     {
         int current = 0;
@@ -31,17 +28,8 @@ namespace Dental
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            //string text = "Select * From [Transactions]";
-            //SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
             try
             {
-                //con.Open();
-                //DataSet ds = new DataSet();
-                //var da = new SQLiteDataAdapter(text, con);
-                //da.AcceptChangesDuringUpdate = true;
-                //da.Fill(ds);
-                //View.ItemsSource = ds.Tables[0].DefaultView;
                 View.ItemsSource = DatabaseWorker.SelectTransactions().Tables[0].DefaultView;
             }
             catch (Exception)
@@ -70,94 +58,13 @@ namespace Dental
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             View.ItemsSource = DatabaseWorker.FindTransactions(textb.Text).DefaultView;
-            //string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            //textb.Text.ToLower();
-            //        SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-            //        try
-            //        {
-            //            _con.Open();
-            //            string query = "select * from [Transactions]";
-            //            if (textb.Text != "") // Note: txt_Search is the TextBox..
-            //            {
-            //                query += $" where Description Like '@{textb.Text}@' or where id_Patient Like '%{textb.Text}%' or where Suma Like '%{textb.Text}%' or where Type Like '%{textb.Text}%'";
-            //            }
-            //            SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-            //            _cmd.ExecuteNonQuery();
-
-            //            SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
-            //            DataTable _dt = new DataTable();
-            //            _adp.Fill(_dt);
-            //            View.ItemsSource = _dt.DefaultView;
-            //            _adp.Update(_dt);
-
-            //            _con.Close();
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            MessageBox.Show(ex.Message);
-            //        }
         }
 
         private void View_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-            string tmp = string.Empty;
-            string text = $"Select [Name] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
-            try
-            {
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    tmp = "Карточка:" + dataReader.GetString(0) + " ";
-                }
-                con.Dispose();
-            }
-            catch
-            {
-
-            }
-
-            text = $"Select [Surname] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
-            try
-            {
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    tmp += dataReader.GetString(0) + " ";
-                }
-                con.Dispose();
-            }
-            catch
-            {
-
-            }
-
-            text = $"Select [FatherName] From [Patients] where Id='{((DataRowView)View.SelectedItems[0])["Id"].ToString()}'";
-            try
-            {
-                SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                con.Open();
-                SQLiteCommand comand = new SQLiteCommand(text, con);
-                SQLiteDataReader dataReader = comand.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    tmp += dataReader.GetString(0) + " ";
-                }
-                con.Dispose();
-            }
-            catch
-            {
-
-            }
-
-
-            TabItem tb = new TabItem() { Header=tmp, Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["Id"].ToString()) } };
+            Patient patient = DatabaseWorker.getPatient(((DataRowView)View.SelectedItems[0])["Id_patient"].ToString());
+            string tmp = "Карточка:" + patient.Name+ " "+patient.Surname+" "+patient.FatherName;
+            TabItem tb = new TabItem() { Header=tmp, Content = new Frame() { Content = new Card(patient.Id) } };
             MainWindow.Pager.Items.Add(tb);
             MainWindow.Pager.SelectedItem = tb;
         }

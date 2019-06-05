@@ -56,6 +56,62 @@ namespace Dental
             }
 
         }
+        public static DataSet SelectPatients()
+        {
+            string text = "Select * From [Patients]";
+            try
+            {
+
+                DataSet ds = new DataSet();
+                var da = new SQLiteDataAdapter(text, con);
+                da.AcceptChangesDuringUpdate = true;
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public static void DeletePatient(string id)
+        {
+            try
+            {
+                
+                
+                SQLiteCommand _cmd = new SQLiteCommand($"Delete from [Patients] where Id='{id}'", con);
+                _cmd.ExecuteNonQuery();
+                _cmd.CommandText = $"Delete from [Treatment] where id_Patient='{ id}'";
+                _cmd.ExecuteNonQuery();
+                _cmd.CommandText = $"Delete from [Depth] where id_Patient='{ id}'";
+                _cmd.ExecuteNonQuery();
+                _cmd.CommandText = $"Delete from [Transactions] where id_Patient='{ id}'";
+                _cmd.ExecuteNonQuery();
+
+                
+            }
+            catch
+            { 
+            }
+
+        }
+        public static DataTable FindPatient(string pattern)
+        {
+            string query = "select * from [Patients]";
+            if (pattern != "") // Note: txt_Search is the TextBox..
+            {
+                query += $" where Description Like '@{pattern}@' or Mobile_Phone Like '%{pattern}%' or Home_Phone Like '%{pattern}%' or  Work_Phone Like '%{pattern}%' or FatherName Like '%{pattern}%' or Surname Like '%{pattern}pattern%' or Name Like '%{pattern}%'";
+            }
+            SQLiteCommand _cmd = new SQLiteCommand(query, con);
+            _cmd.ExecuteNonQuery();
+
+            SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+            DataTable _dt = new DataTable();
+            _adp.Fill(_dt);
+            _adp.Update(_dt);
+            return _dt;
+        }
         public static void NewCard(string name, string surname, string fathername,string gender, string mobphone, string homephone, string workphone, string birth, string descr)
         {
             string query = $"insert into [Patients] (Name,Surname,FatherName,Gender,Mobile_Phone,Home_Phone,Work_Phone,Date_Birth,Description,Date) values ('{name}','{surname}','{fathername}','{gender}','{mobphone}','{homephone}','{workphone}','{birth}','{descr}','{DateTime.Today.ToShortDateString()}')";
@@ -90,7 +146,6 @@ namespace Dental
             _cmd.ExecuteNonQuery();
 
         }
-
         public static void InsertTreatment(string Price, string Descr, string Id_Pat, string Date)
         {
 
@@ -102,7 +157,9 @@ namespace Dental
         public static Patient getPatient(string Id)
         {
             Patient patient = new Patient();
-            string text = $"Select [Date],[Date_Birth], [Mobile_Phone], [Home_Phone], [Work_Phone], [Description] From [Patients] where Id='{Id}'";
+            patient.Id = Id;
+            
+            string text = $"Select [Date],[Date_Birth], [Mobile_Phone], [Home_Phone], [Work_Phone], [Description], [Name],[Surname],[FatherName] From [Patients] where Id='{Id}'";
             SQLiteCommand comand = new SQLiteCommand(text, con);
             SQLiteDataReader dataReader = comand.ExecuteReader();
             while (dataReader.Read())
@@ -114,11 +171,15 @@ namespace Dental
                 patient.Home_Phone = dataReader.GetString(3);
                 patient.Work_Phone = dataReader.GetString(4);
                 patient.Description = dataReader.GetString(5);
+                patient.Name = dataReader.GetString(6);
+                
+                patient.Surname = dataReader.GetString(7);
+                patient.FatherName = dataReader.GetString(8);
+                
             }
-
+           
             return patient;
         }
-
         public static string GetTreatmentString(string id)
         {
             string Rez = string.Empty;
@@ -182,6 +243,20 @@ namespace Dental
             return Rez;
         }
 
+        public static void UpdatePatient(string Name, string Surname, string FatherName, string Mobile_Phone, string Home_Phone, string Work_Phone, string Date_Birth, string Gender, string Card_Num,string Description,string Date, string id)
+        {
+            using (SQLiteCommand command = con.CreateCommand())
+            {
 
+                command.CommandText =
+                    $"update Patients set Name = '{Name}', Surname = '{Surname}'," +
+                    $" FatherName = '{FatherName}', Mobile_Phone = '{Mobile_Phone}'," +
+                    $" Home_Phone = '{Home_Phone}', Work_Phone = '{Work_Phone}', " +
+                    $"Date_Birth = '{Date_Birth}', Gender = '{Gender}', Card_Num = '{Card_Num}', Description = '{Description}', Date = '{Date}' where Id = '{id}'";
+                
+                command.ExecuteNonQuery();
+
+            }
+        }
     }
 }
