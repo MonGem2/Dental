@@ -96,6 +96,19 @@ namespace Dental
             }
 
         }
+        public static void DeleteDepth(string id)
+        {
+            try
+            {
+                SQLiteCommand _cmd = new SQLiteCommand($"Delete from [Patients] where Id='{id}'", con);
+                _cmd.CommandText = $"Delete from [Depth] where Id='{ id}'";
+                _cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+            }
+
+        }
         public static DataTable FindPatient(string pattern)
         {
             string query = "select * from [Patients]";
@@ -122,10 +135,10 @@ namespace Dental
         {
             con.Close();
         }
-        public static void InsertTransaction(string Price, string Descr, string Id_Pat, string Date)
+        public static void InsertTransaction(string Price, string Descr, string Id_Pat, string Date, string Type= "Добавлен долг")
         {
 
-            string query1 = $"insert into [Transactions] (Suma,Description,id_Patient,Date,Type) values ('{Price}','{Descr}','{Id_Pat}','{Date}','Добавлен долг')";
+            string query1 = $"insert into [Transactions] (Suma,Description,id_Patient,Date,Type) values ('{Price}','{Descr}','{Id_Pat}','{Date}','{Type}')";
             SQLiteCommand _cmd1 = new SQLiteCommand(query1, con);
             _cmd1.ExecuteNonQuery();
 

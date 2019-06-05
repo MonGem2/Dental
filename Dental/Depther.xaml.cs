@@ -52,42 +52,20 @@ namespace Dental
                 }
                 else
                 {
-                    string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
-                    SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                     try
                     {
+                       
 
-                        string query="";
-                        _con.Open();
                         if (max_sum != double.Parse(Sum.Text))
                         {
-                            query = $"Update [Depth] set Suma='{max_sum - double.Parse(Sum.Text)}' where Id='{ID}'";
-
-                            SQLiteConnection _con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                            _con1.Open();
-                            string query1 = $"insert into [Transactions] (Suma,id_Patient,Date,Type) values ('{Sum.Text}','{id_Patient}','Неполное погашение долга')";
-                            SQLiteCommand _cmd1 = new SQLiteCommand(query1, _con1);
-                            _cmd1.ExecuteNonQuery();
-
-                            _con1.Close();
+                            DatabaseWorker.InsertTransaction(Sum.Text, "", id_Patient.ToString(), DateTime.Today.ToLongDateString(), "Неполное погашение долга");
                         }
                         else
                         {
-                            query = $"Delete from Depth where Id='{ID}'";
-
-                            SQLiteConnection _con1 = new SQLiteConnection("Data Source=" + path + ";Version=3;");
-                            _con1.Open();
-                            string query1 = $"insert into [Transactions] (Suma,Description,id_Patient,Date,Type) values ('{Sum.Text}','{id_Patient}','Погашение долга')";
-                            SQLiteCommand _cmd1 = new SQLiteCommand(query1, _con1);
-                            _cmd1.ExecuteNonQuery();
-
-                            _con1.Close();
+                            DatabaseWorker.DeleteDepth(ID);
+                            DatabaseWorker.InsertTransaction(Sum.Text, "", id_Patient.ToString(), DateTime.Today.ToLongDateString(), "Погашение долга");
+                            
                         }
-                        SQLiteCommand _cmd = new SQLiteCommand(query, _con);
-                        _cmd.ExecuteNonQuery();
-
-                        _con.Close();
-
                     }
                     catch (Exception ex)
                     {
