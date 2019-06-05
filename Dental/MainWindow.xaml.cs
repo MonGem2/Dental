@@ -31,6 +31,7 @@ namespace Dental
             grid.Children.Add(Pager);
             Grid.SetColumn(Pager, 1);
             this.Closing += MainWindow_Closing;
+            //DatabaseWorker.InsertTransaction("100", "dsdad", "1", "addsas", "asdadsk");
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
