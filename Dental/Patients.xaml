@@ -38,11 +38,11 @@
     
     
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="25"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <Grid Height="25" Background="White">
                 <Grid.ColumnDefinitions>

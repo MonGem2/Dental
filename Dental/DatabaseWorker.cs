@@ -310,7 +310,41 @@ namespace Dental
             }
             return Rez;
         }
+        public static string GetPatient(string Name, string Surname, string FatherName)
+        {
+            string query = "select * from [Patients]";
+            //string query = "where";
+            //if (Name != string.Empty)
+            //{
+            //    query += " Name Like '%{Name}%'";
+            //    if (Surname != string.Empty)
+            //    {
+            //        query += " Name Like '%{Name}%'";
+            //    }
+            //}
+            query += $" where FatherName Like '%{FatherName}%' and Surname Like '%{Surname}%' and Name Like '%{Name}%'";
+            
+            SQLiteCommand _cmd = new SQLiteCommand(query, con);
+            _cmd.ExecuteNonQuery();
+            SQLiteDataAdapter _adp = new SQLiteDataAdapter(_cmd);
+            DataTable _dt = new DataTable();
+            _adp.Fill(_dt);
+            _adp.Update(_dt);
+            try
+            {
 
+                
+                return (_dt.Rows[0])["Id"].ToString();
+
+            }
+            catch (Exception)
+            {
+
+                
+            }
+
+            return string.Empty;
+        }
         public static void UpdatePatient(string Name, string Surname, string FatherName, string Mobile_Phone, string Home_Phone, string Work_Phone, string Date_Birth, string Gender, string Card_Num,string Description,string Date, string id)
         {
             using (SQLiteCommand command = con.CreateCommand())

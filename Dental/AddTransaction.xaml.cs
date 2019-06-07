@@ -52,5 +52,10 @@ namespace Dental
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
         }
+
+        private void Find(object sender, RoutedEventArgs e)
+        {
+            Id_Pat.Text = DatabaseWorker.GetPatient(Name.Text, Surname.Text, FatherName.Text);
+        }
     }
 }
