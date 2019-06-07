@@ -85,7 +85,10 @@
             <TextBox Margin="5,0,5,5" Grid.Row="0" Grid.Column="1" Name="name" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <TextBox Margin="5,0,5,5" Grid.Row="1" Grid.Column="1" Name="surname" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <TextBox Margin="5,0,5,5" Grid.Row="2" Grid.Column="1" Name="fathername" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
-            <TextBox Margin="5,0,5,5" Grid.Row="3" Grid.Column="1" Name="gender" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
+            <ComboBox Margin="5,0,5,5" Grid.Row="3" Grid.Column="1" Name="gender" Background="White" Tag="Write..." SelectedIndex="0">
+                <ComboBoxItem>Мужской</ComboBoxItem>
+                <ComboBoxItem>Женский</ComboBoxItem>
+            </ComboBox>
             <TextBox Margin="5,0,5,5" Grid.Row="4" Grid.Column="1" Name="mobphone" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <TextBox Margin="5,0,5,5" Grid.Row="5" Grid.Column="1" Name="homephone" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <TextBox Margin="5,0,5,5" Grid.Row="6" Grid.Column="1" Name="workphone" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>

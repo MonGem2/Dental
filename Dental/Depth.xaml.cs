@@ -26,9 +26,32 @@ namespace Dental
         public Depth()
         {
             InitializeComponent();
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem menuItem = new MenuItem();
+            menuItem.Header = "Показать пациента";
+            menuItem.Click += OpenPatient;
+            contextMenu.Items.Add(menuItem);
+            menuItem = new MenuItem();
+            menuItem.Header = "Погасить долг";
+            menuItem.Click += Pay_the_debt_off;
+            contextMenu.Items.Add(menuItem);
+            View.ContextMenu = contextMenu;
+
+
+
+            contextMenu = new ContextMenu();
+            menuItem = new MenuItem();
+            menuItem.Header = "Показать пациента";
+            menuItem.Click += Open_Patient;
+            contextMenu.Items.Add(menuItem);
+            menuItem = new MenuItem();
+            menuItem.Header = "Принять предоплату";
+            menuItem.Click += Accept_prepayment;
+            contextMenu.Items.Add(menuItem);
+            View1.ContextMenu = contextMenu;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, object e)
         {
             
             View.ItemsSource = DatabaseWorker.SelectDepth().Tables[0].DefaultView;
@@ -36,12 +59,12 @@ namespace Dental
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, object e)
         {
             MainWindow.Pager.Items.Remove(MainWindow.tb2);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddDepth(object sender, object e)
         {
             try
             {
@@ -54,7 +77,7 @@ namespace Dental
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Pay_the_debt_off(object sender, object e)
         {
 
             string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
@@ -93,7 +116,7 @@ namespace Dental
             }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void Add_Pered(object sender, object e)
         {
             try
             {
@@ -114,7 +137,7 @@ namespace Dental
             }
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void Accept_prepayment(object sender, object e)
         {
             //DatabaseWorker.InsertTransaction("100", "dsfsdf", "1", "asfds", "sfdsdjkfsnk");
             if (View1.SelectedItems.Count != 0)
@@ -154,7 +177,7 @@ namespace Dental
             }
         }
 
-        private void View_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void OpenPatient(object sender, object e)
         {
             Patient patient = DatabaseWorker.getPatient(((DataRowView)View.SelectedItems[0])["id_Patient"].ToString());            
             string tmp = string.Empty;
@@ -166,7 +189,7 @@ namespace Dental
 
 
 
-        private void View_MouseDoubleClick1(object sender, MouseButtonEventArgs e)
+        private void Open_Patient(object sender, object e)
         {
             Patient patient = DatabaseWorker.getPatient(((DataRowView)View1.SelectedItems[0])["id_Patient"].ToString());
             

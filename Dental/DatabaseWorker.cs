@@ -13,6 +13,12 @@ namespace Dental
     {
         static string path = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName + @"\Base\Denta.db";
         static SQLiteConnection con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
+        public static void ReduceDepth(string ID, string diference)
+        {
+            SQLiteCommand cmd = new SQLiteCommand(con);
+            cmd.CommandText = $"update Depth set Suma=Suma-{diference} where Id='{ID}'";
+            cmd.ExecuteNonQuery();
+        }
         static DatabaseWorker()
         {
             con.Open();

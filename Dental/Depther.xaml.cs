@@ -24,6 +24,7 @@ namespace Dental
         public Depther()
         {
             InitializeComponent();
+
         }
 
         double max_sum=0;
@@ -58,6 +59,8 @@ namespace Dental
 
                         if (max_sum != double.Parse(Sum.Text))
                         {
+                            
+                            DatabaseWorker.ReduceDepth(ID, Sum.Text);
                             DatabaseWorker.InsertTransaction(Sum.Text, "", id_Patient.ToString(), DateTime.Today.ToLongDateString(), "Неполное погашение долга");
                         }
                         else
@@ -66,6 +69,7 @@ namespace Dental
                             DatabaseWorker.InsertTransaction(Sum.Text, "", id_Patient.ToString(), DateTime.Today.ToLongDateString(), "Погашение долга");
                             
                         }
+                        this.Close();//lol
                     }
                     catch (Exception ex)
                     {
