@@ -29,9 +29,22 @@ namespace Dental
         public Patients()
         {
             InitializeComponent();
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem menuItem = new MenuItem();
+            menuItem.Header = "Открить";
+            menuItem.Click +=OpenPatient;
+            contextMenu.Items.Add(menuItem);
+            menuItem = new MenuItem();
+            menuItem.Header = "Новое лечение";
+            menuItem.Click += NewTreatment;
+            contextMenu.Items.Add(menuItem);
+            menuItem = new MenuItem();
+            menuItem.Header = "Удалить";
+            menuItem.Click += DeletePatient;
+            contextMenu.Items.Add(menuItem);
+            View.ContextMenu = contextMenu;
+
         }
-        //DataRowView row = (DataRowView)dg.SelectedItems[0];
-        //row["Id"]
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             
@@ -44,7 +57,7 @@ namespace Dental
             MainWindow.Pager.Items.Remove(MainWindow.tb);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void DeletePatient(object sender, object e)
         {
             if (View.SelectedItems.Count != 0)
             {
@@ -71,7 +84,7 @@ namespace Dental
              }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void OpenPatient(object sender, RoutedEventArgs e)
         {   
             try
             {
@@ -82,7 +95,7 @@ namespace Dental
             catch { }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void NewTreatment(object sender, RoutedEventArgs e)
         {
             try
             {

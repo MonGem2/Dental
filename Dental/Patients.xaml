@@ -58,9 +58,9 @@
                     
                 </TextBox>
                 <Button Grid.Column="5" HorizontalAlignment="Right" Width="20" VerticalAlignment="Center" Background="White" BorderThickness="0" Content="⨉" Click="Button_Click_4" Margin="0,0,1,0"/>
-                <Button Content="Открыть карточку" Grid.Column="1" Click="Button_Click_2"/>
-                <Button Content="Добавить лечение" Grid.Column="2" Click="Button_Click_3"/>
-                <Button Content="Удалить пациента" Grid.Column="3" Click="Button_Click_1" Height="25" VerticalAlignment="Bottom"/>
+                <Button Content="Открыть карточку" Grid.Column="1" Click="OpenPatient"/>
+                <Button Content="Добавить лечение" Grid.Column="2" Click="NewTreatment"/>
+                <Button Content="Удалить пациента" Grid.Column="3" Click="DeletePatient" Height="25" VerticalAlignment="Bottom"/>
                 <Button Content="⨉" Grid.Column="6" Background="IndianRed" Click="Button_Click"/>
                 <Button Content="Новая карточка" Grid.Row="2" HorizontalContentAlignment="Center" Click="AddCard_Click"/>
             </Grid>

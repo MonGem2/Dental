@@ -56,7 +56,11 @@ namespace Dental
             Title = "";
             Info.Text = "";
             Treatment.Text = "";
+
             Title = "Карточка: " + patient.Name + "  " + patient.Surname + "  " + patient.FatherName;
+            Info.Text += "Имя:"+patient.Name+"\n";
+            Info.Text += "Фамилмя:" + patient.Surname + "\n";
+            Info.Text += "Отчество:" + patient.FatherName + "\n";
             Info.Text += "Дата создания карты: " + patient.Date + "\n";
             Info.Text += "Дата рождения: " + patient.Date_Birth + "\n";
             Info.Text += "Мобильный: " + patient.Mobile_Phone + "\n";
