@@ -31,7 +31,18 @@ namespace Dental
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
+            Clear();
             MainWindow.Pager.Items.Remove(t.First());
+        }
+        private void Clear()
+        {
+            name.Clear();
+            surname.Clear();
+            fathername.Clear();
+            mobphone.Clear();
+            homephone.Clear();
+            workphone.Clear();
+            descr.Clear();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -42,8 +53,8 @@ namespace Dental
             }
             else
             {
-                DatabaseWorker.NewCard(name.Text, surname.Text, fathername.Text, gender.Text, mobphone.Text, homephone.Text, workphone.Text, birth.Text, descr.Text);
-                
+                DatabaseWorker.NewCard(name.Text, surname.Text, fathername.Text, gender.Text, mobphone.Text, homephone.Text, workphone.Text, birth.SelectedDate.ToString(), descr.Text);
+                Clear();
                 var t = from TabItem el in MainWindow.Pager.Items where (el.Content as Frame).Content == this select el;
                 MainWindow.Pager.Items.Remove(t.First());
             }

@@ -45,7 +45,11 @@ namespace Dental
             {
                 if (double.Parse(Sum.Text) > max_sum)
                 {
-                    MessageBox.Show("Сумма больше долга!!!");
+                    DatabaseWorker.InsertPered((double.Parse(Sum.Text) - max_sum).ToString(), "Остаток из долга", id_Patient.ToString(), DateTime.Today.ToLongDateString());
+                    DatabaseWorker.DeleteDepth(ID);
+                    DatabaseWorker.InsertTransaction(max_sum.ToString(), "", id_Patient.ToString(), DateTime.Today.ToLongDateString(), "Погашение долга");
+                    DatabaseWorker.InsertTransaction((double.Parse(Sum.Text) - max_sum).ToString(), "", id_Patient.ToString(), DateTime.Today.ToLongDateString(), "Добавление предоплаты");
+                    this.Close();
                 }
                 else if (double.Parse(Sum.Text) <= 0)
                 {
@@ -57,7 +61,7 @@ namespace Dental
                     {
                        
 
-                        if (max_sum != double.Parse(Sum.Text))
+                        if (max_sum > double.Parse(Sum.Text))
                         {
                             
                             DatabaseWorker.ReduceDepth(ID, Sum.Text);
@@ -69,7 +73,7 @@ namespace Dental
                             DatabaseWorker.InsertTransaction(Sum.Text, "", id_Patient.ToString(), DateTime.Today.ToLongDateString(), "Погашение долга");
                             
                         }
-                        this.Close();//lol
+                        this.Close();
                     }
                     catch (Exception ex)
                     {

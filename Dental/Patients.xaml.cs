@@ -31,7 +31,7 @@ namespace Dental
             InitializeComponent();
             ContextMenu contextMenu = new ContextMenu();
             MenuItem menuItem = new MenuItem();
-            menuItem.Header = "Открить";
+            menuItem.Header = "Открыть";
             menuItem.Click +=OpenPatient;
             contextMenu.Items.Add(menuItem);
             menuItem = new MenuItem();
@@ -48,10 +48,23 @@ namespace Dental
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             
-            View.ItemsSource = DatabaseWorker.SelectPatients().Tables[0].DefaultView;
+            DataTable dt = DatabaseWorker.SelectPatients().Tables[0];
+            dt.Columns["Id"].ColumnName = "Идентификатор";
+            dt.Columns["Name"].ColumnName = "Имя";
+            dt.Columns["Surname"].ColumnName = "Фамилия";
+            dt.Columns["FatherName"].ColumnName = "Отчество";
+            dt.Columns["Mobile_Phone"].ColumnName = "Телефон_1";
+            dt.Columns["Work_Phone"].ColumnName = "Телефон_2";
+            dt.Columns["Home_Phone"].ColumnName = "Телефон_3";
+            dt.Columns["Date_Birth"].ColumnName = "Дата-рождения";
+            dt.Columns["Gender"].ColumnName = "Стать";
+            dt.Columns["Card_Num"].ColumnName = "Номер-карточки";
+            dt.Columns["Description"].ColumnName = "Описание";
+            dt.Columns["Date"].ColumnName = "Дата-создания";
+            View.ItemsSource = dt.DefaultView;
             
         }
-
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Pager.Items.Remove(MainWindow.tb);
@@ -65,7 +78,7 @@ namespace Dental
                 if (dialogResult == MessageBoxResult.Yes)
                 {
                     DataRowView row = (DataRowView)View.SelectedItems[0];
-                    DatabaseWorker.DeletePatient(row["id"].ToString());
+                    DatabaseWorker.DeletePatient(row["Идентификатор"].ToString());
                     View.ItemsSource = DatabaseWorker.SelectPatients().Tables[0].DefaultView;                  
                 }
             }
@@ -88,7 +101,7 @@ namespace Dental
         {   
             try
             {
-                TabItem tb = new TabItem() { Header = "Карточка: " + ((DataRowView)View.SelectedItems[0])["Name"].ToString() + " " + ((DataRowView)View.SelectedItems[0])["Surname"].ToString() + " " + ((DataRowView)View.SelectedItems[0])["FatherName"].ToString(), Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["Name"].ToString(), ((DataRowView)View.SelectedItems[0])["Surname"].ToString(), ((DataRowView)View.SelectedItems[0])["FatherName"].ToString(), ((DataRowView)View.SelectedItems[0])["Id"].ToString()) } };
+                TabItem tb = new TabItem() { Header = "Карточка: " + ((DataRowView)View.SelectedItems[0])["Имя"].ToString() + " " + ((DataRowView)View.SelectedItems[0])["Фамилия"].ToString() + " " + ((DataRowView)View.SelectedItems[0])["Отчество"].ToString(), Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["Имя"].ToString(), ((DataRowView)View.SelectedItems[0])["Фамилия"].ToString(), ((DataRowView)View.SelectedItems[0])["Отчество"].ToString(), ((DataRowView)View.SelectedItems[0])["Идентификатор"].ToString()) } };
                 MainWindow.Pager.Items.Add(tb);
                 MainWindow.Pager.SelectedItem = tb;
             }
@@ -99,7 +112,7 @@ namespace Dental
         {
             try
             {
-                (new AddTreatment(((DataRowView)View.SelectedItems[0])["Id"].ToString())).ShowDialog();
+                (new AddTreatment(((DataRowView)View.SelectedItems[0])["Идентификатор"].ToString())).ShowDialog();
             }
             catch { }
         }
@@ -113,7 +126,7 @@ namespace Dental
         {
             try
             {
-                TabItem tb = new TabItem() { Header= "Карточка: " + ((DataRowView)View.SelectedItems[0])["Name"].ToString() + " " + ((DataRowView)View.SelectedItems[0])["Surname"].ToString() + " " + ((DataRowView)View.SelectedItems[0])["FatherName"].ToString(), Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["Name"].ToString(), ((DataRowView)View.SelectedItems[0])["Surname"].ToString(), ((DataRowView)View.SelectedItems[0])["FatherName"].ToString(), ((DataRowView)View.SelectedItems[0])["Id"].ToString()) } };
+                TabItem tb = new TabItem() { Header= "Карточка: " + ((DataRowView)View.SelectedItems[0])["Имя"].ToString() + " " + ((DataRowView)View.SelectedItems[0])["Фамилия"].ToString() + " " + ((DataRowView)View.SelectedItems[0])["Отчество"].ToString(), Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["Имя"].ToString(), ((DataRowView)View.SelectedItems[0])["Фамилия"].ToString(), ((DataRowView)View.SelectedItems[0])["Отчество"].ToString(), ((DataRowView)View.SelectedItems[0])["Идентификатор"].ToString()) } };
                 MainWindow.Pager.Items.Add(tb);
                 tb.IsSelected = true;
             }
@@ -134,10 +147,10 @@ namespace Dental
             
             try
             {
-                DatabaseWorker.UpdatePatient(((DataRowView)View.SelectedItems[0])["Name"].ToString(), ((DataRowView)View.SelectedItems[0])["Surname"].ToString(), ((DataRowView)View.SelectedItems[0])["FatherName"].ToString(),
-                    ((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString(), ((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString(), ((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString(),
-                    ((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString(), ((DataRowView)View.SelectedItems[0])["Gender"].ToString(), ((DataRowView)View.SelectedItems[0])["Card_Num"].ToString(), ((DataRowView)View.SelectedItems[0])["Description"].ToString(),
-                    ((DataRowView)View.SelectedItems[0])["Date"].ToString(), ((DataRowView)View.SelectedItems[0])["Id"].ToString());
+                DatabaseWorker.UpdatePatient(((DataRowView)View.SelectedItems[0])["Имя"].ToString(), ((DataRowView)View.SelectedItems[0])["Фамилия"].ToString(), ((DataRowView)View.SelectedItems[0])["Отчество"].ToString(),
+                    ((DataRowView)View.SelectedItems[0])["Телефон_1"].ToString(), ((DataRowView)View.SelectedItems[0])["Телефон_2"].ToString(), ((DataRowView)View.SelectedItems[0])["Телефон_3"].ToString(),
+                    ((DataRowView)View.SelectedItems[0])["Дата-рождения"].ToString(), ((DataRowView)View.SelectedItems[0])["Стать"].ToString(), ((DataRowView)View.SelectedItems[0])["Номер-карточки"].ToString(), ((DataRowView)View.SelectedItems[0])["Описание"].ToString(),
+                    ((DataRowView)View.SelectedItems[0])["Дата-создания"].ToString(), ((DataRowView)View.SelectedItems[0])["Идентификатор"].ToString());
                 
             }
             catch (Exception ex)
@@ -155,10 +168,10 @@ namespace Dental
                 {
                     try
                     {
-                        DatabaseWorker.UpdatePatient(((DataRowView)View.SelectedItems[0])["Name"].ToString(), ((DataRowView)View.SelectedItems[0])["Surname"].ToString(), ((DataRowView)View.SelectedItems[0])["FatherName"].ToString(),
-                            ((DataRowView)View.SelectedItems[0])["Mobile_Phone"].ToString(), ((DataRowView)View.SelectedItems[0])["Home_Phone"].ToString(), ((DataRowView)View.SelectedItems[0])["Work_Phone"].ToString(),
-                            ((DataRowView)View.SelectedItems[0])["Date_Birth"].ToString(), ((DataRowView)View.SelectedItems[0])["Gender"].ToString(), ((DataRowView)View.SelectedItems[0])["Card_Num"].ToString(), ((DataRowView)View.SelectedItems[0])["Description"].ToString(),
-                            ((DataRowView)View.SelectedItems[0])["Date"].ToString(), ((DataRowView)View.SelectedItems[0])["Id"].ToString());
+                        DatabaseWorker.UpdatePatient(((DataRowView)View.SelectedItems[0])["Имя"].ToString(), ((DataRowView)View.SelectedItems[0])["Фамилия"].ToString(), ((DataRowView)View.SelectedItems[0])["Отчество"].ToString(),
+                            ((DataRowView)View.SelectedItems[0])["Телефон_1"].ToString(), ((DataRowView)View.SelectedItems[0])["Телефон_2"].ToString(), ((DataRowView)View.SelectedItems[0])["Телефон_3"].ToString(),
+                            ((DataRowView)View.SelectedItems[0])["Дата-рождения"].ToString(), ((DataRowView)View.SelectedItems[0])["Стать"].ToString(), ((DataRowView)View.SelectedItems[0])["Номер-карточки"].ToString(), ((DataRowView)View.SelectedItems[0])["Описание"].ToString(),
+                            ((DataRowView)View.SelectedItems[0])["Дата-создания"].ToString(), ((DataRowView)View.SelectedItems[0])["Идентификатор"].ToString());
 
                     }
                     catch (Exception ex)
@@ -174,7 +187,20 @@ namespace Dental
             }
             else if(e.Key == Key.F5)
             {
-                View.ItemsSource = DatabaseWorker.SelectPatients().Tables[0].DefaultView;
+                DataTable dt = DatabaseWorker.SelectPatients().Tables[0];
+                dt.Columns["Id"].ColumnName = "Идентификатор";
+                dt.Columns["Name"].ColumnName = "Имя";
+                dt.Columns["Surname"].ColumnName = "Фамилия";
+                dt.Columns["FatherName"].ColumnName = "Отчество";
+                dt.Columns["Mobile_Phone"].ColumnName = "Телефон_1";
+                dt.Columns["Work_Phone"].ColumnName = "Телефон_2";
+                dt.Columns["Home_Phone"].ColumnName = "Телефон_3";
+                dt.Columns["Date_Birth"].ColumnName = "Дата-рождения";
+                dt.Columns["Gender"].ColumnName = "Стать";
+                dt.Columns["Card_Num"].ColumnName = "Номер-карточки";
+                dt.Columns["Description"].ColumnName = "Описание";
+                dt.Columns["Date"].ColumnName = "Дата-создания";
+                View.ItemsSource = dt.DefaultView;
             }
         }
     }

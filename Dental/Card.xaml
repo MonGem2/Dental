@@ -20,8 +20,8 @@
                     <ColumnDefinition Width="45*"/>
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Background="White" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Name="names" IsReadOnly="True" HorizontalAlignment="Stretch"/>
-                <Button Grid.Column="1" Margin="200,5,3,5" Content="Добавить лечение" Click="Button_Click_1"/>
+                <TextBox Background="White" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Name="names" IsReadOnly="True" HorizontalAlignment="Stretch" FontSize="18" Foreground="#FF090068"/>
+                <Button Grid.Column="1" Margin="250,5,3,5" Content="Добавить лечение" Click="Button_Click_1"/>
                 <Button Content="⨉" Grid.Column="2" Background="IndianRed" Click="Button_Click"/>
             </Grid>
         </StackPanel>
@@ -34,6 +34,11 @@
             <TabItem Header="Лечения пациента">
                 <ScrollViewer>
                     <TextBlock Name="Treatment" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="История оплат">
+                <ScrollViewer>
+                    <TextBlock Name="Transact" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>

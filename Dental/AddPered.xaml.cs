@@ -47,6 +47,7 @@ namespace Dental
                 try
                 {
                     DatabaseWorker.InsertPered(Price.Text, Descr.Text, Id_Pat.Text, Date.Text);
+                    DatabaseWorker.InsertTransaction(Price.Text, Descr.Text, Id_Pat.Text, Date.Text, "Добавление предоплаты");
                     this.Close();
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }

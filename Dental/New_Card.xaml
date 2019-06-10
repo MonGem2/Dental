@@ -65,7 +65,7 @@
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="15*"/>
-                <RowDefinition Height="15*"/>
+                <RowDefinition Height="60*"/>
                 <RowDefinition Height="15*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -77,9 +77,9 @@
             <Label Content="Фамилия" FontSize="18" HorizontalContentAlignment="Right" Grid.Row="1"/>
             <Label Content="Отчество" FontSize="18" HorizontalContentAlignment="Right" Grid.Row="2"/>
             <Label Content="Стать" FontSize="18" HorizontalContentAlignment="Right" Grid.Row="3"/>
-            <Label Content="Мобильный тел." FontSize="18" HorizontalContentAlignment="Right" Grid.Row="4"/>
-            <Label Content="Домашний тел." FontSize="18" HorizontalContentAlignment="Right" Grid.Row="5"/>
-            <Label Content="Робочий тел." FontSize="18" HorizontalContentAlignment="Right" Grid.Row="6"/>
+            <Label Content="Телефон 1" FontSize="18" HorizontalContentAlignment="Right" Grid.Row="4"/>
+            <Label Content="Телефон 2" FontSize="18" HorizontalContentAlignment="Right" Grid.Row="5"/>
+            <Label Content="Телефон 3" FontSize="18" HorizontalContentAlignment="Right" Grid.Row="6"/>
             <Label Content="Дата рождения" FontSize="18" HorizontalContentAlignment="Right" Grid.Row="7"/>
             <Label Content="Описание" FontSize="18" HorizontalContentAlignment="Right" Grid.Row="8"/>
             <TextBox Margin="5,0,5,5" Grid.Row="0" Grid.Column="1" Name="name" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
@@ -92,7 +92,7 @@
             <TextBox Margin="5,0,5,5" Grid.Row="4" Grid.Column="1" Name="mobphone" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <TextBox Margin="5,0,5,5" Grid.Row="5" Grid.Column="1" Name="homephone" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <TextBox Margin="5,0,5,5" Grid.Row="6" Grid.Column="1" Name="workphone" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
-            <DatePicker Margin="5,0,5,5" Grid.Row="7" Grid.Column="1" Name="birth"/>
+            <Calendar Margin="5,0,5,5" Grid.Row="7" Grid.Column="1" Name="birth" />
             <TextBox Margin="5,0,5,5" Grid.Row="8" Grid.Column="1" Name="descr" Style="{StaticResource MyWaterMarkStyle}" Tag="Write..."/>
             <Button Grid.Row="5" Grid.RowSpan="2" Grid.Column="2" Margin="10,10" Content="Готово" Click="Button_Click_1"/>
         </Grid>

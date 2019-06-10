@@ -360,5 +360,20 @@ namespace Dental
 
             }
         }
+        public static List<string> getPatientsTransactionString(string Id)
+        {
+            List<string> res = new List<string>();
+            string text = $"Select [Date],[Type],[Suma],[Description] From [Transactions] where id_Patient='{Id}'";
+            SQLiteCommand comand = new SQLiteCommand(text, con);
+            SQLiteDataReader dataReader = comand.ExecuteReader();
+            while (dataReader.Read())
+            {
+                res.Add("Дата:"+dataReader.GetString(0));
+                res.Add("Тип:"+dataReader.GetString(1));
+                res.Add("Сума:"+dataReader.GetValue(2).ToString());
+                res.Add("Описание:"+dataReader.GetString(3)+"\n");
+            }
+            return res;
+        }
     }
 }

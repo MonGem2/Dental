@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dental"
         mc:Ignorable="d"
-        Title="Dental" Height="450" Width="800">
+        Title="Dental" Height="600" Width="1000">
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="200*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1" ShowGridLines="True" Name="grid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="35*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Margin="0,0,0,250" Background="WhiteSmoke">
