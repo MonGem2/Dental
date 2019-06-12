@@ -18,5 +18,6 @@ namespace Dental
         public string Home_Phone;
         public string Work_Phone;
         public string Description;
+        public string Gender;
     }
 }

@@ -31,7 +31,7 @@ namespace Dental
             {
                 DataTable dt = DatabaseWorker.SelectTransactions().Tables[0];
                 dt.Columns["Id"].ColumnName = "Идентификатор";
-                dt.Columns["id_Patient"].ColumnName = "Ид.пациента";
+                dt.Columns["id_Patient"].ColumnName = "Ид-пациента";
                 dt.Columns["Description"].ColumnName = "Описание";
                 dt.Columns["Date"].ColumnName = "Дата";
                 dt.Columns["Suma"].ColumnName = "Сума";
@@ -62,7 +62,7 @@ namespace Dental
             {
                 DataTable dt = DatabaseWorker.SelectTransactions().Tables[0];
                 dt.Columns["Id"].ColumnName = "Идентификатор";
-                dt.Columns["id_Patient"].ColumnName = "Ид.пациента";
+                dt.Columns["id_Patient"].ColumnName = "Ид-пациента";
                 dt.Columns["Description"].ColumnName = "Описание";
                 dt.Columns["Date"].ColumnName = "Дата";
                 dt.Columns["Suma"].ColumnName = "Сума";
@@ -79,7 +79,7 @@ namespace Dental
 
         private void View_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Patient patient = DatabaseWorker.getPatient(((DataRowView)View.SelectedItems[0])["Ид.пациента"].ToString());
+            Patient patient = DatabaseWorker.getPatient(((DataRowView)View.SelectedItems[0])["Ид-пациента"].ToString());
             string tmp = "Карточка:" + patient.Name+ " "+patient.Surname+" "+patient.FatherName;
             TabItem tb = new TabItem() { Header=tmp, Content = new Frame() { Content = new Card(patient.Id) } };
             MainWindow.Pager.Items.Add(tb);

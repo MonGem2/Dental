@@ -227,7 +227,7 @@ namespace Dental
             Patient patient = new Patient();
             patient.Id = Id;
             
-            string text = $"Select [Date],[Date_Birth], [Mobile_Phone], [Home_Phone], [Work_Phone], [Description], [Name],[Surname],[FatherName] From [Patients] where Id='{Id}'";
+            string text = $"Select [Date],[Date_Birth], [Mobile_Phone], [Home_Phone], [Work_Phone], [Description], [Name],[Surname],[FatherName],[Gender] From [Patients] where Id='{Id}'";
             SQLiteCommand comand = new SQLiteCommand(text, con);
             SQLiteDataReader dataReader = comand.ExecuteReader();
             while (dataReader.Read())
@@ -243,6 +243,7 @@ namespace Dental
                 
                 patient.Surname = dataReader.GetString(7);
                 patient.FatherName = dataReader.GetString(8);
+                patient.Gender = dataReader.GetString(9);
                 
             }
            
@@ -310,18 +311,9 @@ namespace Dental
             }
             return Rez;
         }
-        public static string GetPatient(string Name, string Surname, string FatherName)
+        public static Patient GetPatient(string Name, string Surname, string FatherName)
         {
             string query = "select * from [Patients]";
-            //string query = "where";
-            //if (Name != string.Empty)
-            //{
-            //    query += " Name Like '%{Name}%'";
-            //    if (Surname != string.Empty)
-            //    {
-            //        query += " Name Like '%{Name}%'";
-            //    }
-            //}
             query += $" where FatherName Like '%{FatherName}%' and Surname Like '%{Surname}%' and Name Like '%{Name}%'";
             
             SQLiteCommand _cmd = new SQLiteCommand(query, con);
@@ -333,8 +325,20 @@ namespace Dental
             try
             {
 
-                
-                return (_dt.Rows[0])["Id"].ToString();
+                Patient p = new Patient();
+                p.Date = (_dt.Rows[0])["Date"].ToString();
+                p.Date_Birth = (_dt.Rows[0])["Date_Birth"].ToString();
+                p.Name= (_dt.Rows[0])["Name"].ToString();
+                p.Surname= (_dt.Rows[0])["Surname"].ToString(); 
+                p.FatherName= (_dt.Rows[0])["FatherName"].ToString();
+                p.Description= (_dt.Rows[0])["Description"].ToString();
+                p.Home_Phone= (_dt.Rows[0])["Home_Phone"].ToString();
+                p.Id= (_dt.Rows[0])["Id"].ToString();
+                p.Mobile_Phone= (_dt.Rows[0])["Mobile_Phone"].ToString();
+                p.Work_Phone= (_dt.Rows[0])["Work_Phone"].ToString();
+                p.Gender = (_dt.Rows[0])["Gender"].ToString();
+
+                return p;
 
             }
             catch (Exception)
@@ -343,7 +347,7 @@ namespace Dental
                 
             }
 
-            return string.Empty;
+            return null;
         }
         public static void UpdatePatient(string Name, string Surname, string FatherName, string Mobile_Phone, string Home_Phone, string Work_Phone, string Date_Birth, string Gender, string Card_Num,string Description,string Date, string id)
         {

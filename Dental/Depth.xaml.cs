@@ -55,14 +55,14 @@ namespace Dental
         {
             DataTable dt = DatabaseWorker.SelectDepth().Tables[0];
             dt.Columns["Id"].ColumnName = "Идентификатор";
-            dt.Columns["id_Patient"].ColumnName = "Ид.пациента";
+            dt.Columns["id_Patient"].ColumnName = "Ид-пациента";
             dt.Columns["Description"].ColumnName = "Описание";
             dt.Columns["Date"].ColumnName = "Дата";
             dt.Columns["Suma"].ColumnName = "Сума";
             View.ItemsSource = dt.DefaultView;
             dt = DatabaseWorker.SelectPered().Tables[0];
             dt.Columns["Id"].ColumnName = "Идентификатор";
-            dt.Columns["id_Patient"].ColumnName = "Ид.пациента";
+            dt.Columns["id_Patient"].ColumnName = "Ид-пациента";
             dt.Columns["Description"].ColumnName = "Описание";
             dt.Columns["Date"].ColumnName = "Дата";
             dt.Columns["Suma"].ColumnName = "Сума";
@@ -85,7 +85,7 @@ namespace Dental
             {
                 DataTable dt = DatabaseWorker.SelectDepth().Tables[0];
                 dt.Columns["Id"].ColumnName = "Идентификатор";
-                dt.Columns["id_Patient"].ColumnName = "Ид.пациента";
+                dt.Columns["id_Patient"].ColumnName = "Ид-пациента";
                 dt.Columns["Description"].ColumnName = "Описание";
                 dt.Columns["Date"].ColumnName = "Дата";
                 dt.Columns["Suma"].ColumnName = "Сума";
@@ -113,7 +113,7 @@ namespace Dental
                     SQLiteConnection _con = new SQLiteConnection("Data Source=" + path + ";Version=3;");
                     try {
                         DataRowView row = (DataRowView)View.SelectedItems[0];
-                        (new Depther(double.Parse(row["Сума"].ToString()),row["Идентификатор"].ToString(),int.Parse(row["Ид.пациента"].ToString()))).ShowDialog();
+                        (new Depther(double.Parse(row["Сума"].ToString()),row["Идентификатор"].ToString(),int.Parse(row["Ид-пациента"].ToString()))).ShowDialog();
                         }
                     catch { }
                     finally
@@ -122,14 +122,14 @@ namespace Dental
                     {
                         DataTable dt = DatabaseWorker.SelectDepth().Tables[0];
                         dt.Columns["Id"].ColumnName = "Идентификатор";
-                        dt.Columns["id_Patient"].ColumnName = "Ид.пациента";
+                        dt.Columns["id_Patient"].ColumnName = "Ид-пациента";
                         dt.Columns["Description"].ColumnName = "Описание";
                         dt.Columns["Date"].ColumnName = "Дата";
                         dt.Columns["Suma"].ColumnName = "Сума";
                         View.ItemsSource = dt.DefaultView;
                         dt = DatabaseWorker.SelectPered().Tables[0];
                         dt.Columns["Id"].ColumnName = "Идентификатор";
-                        dt.Columns["id_Patient"].ColumnName = "Ид.пациента";
+                        dt.Columns["id_Patient"].ColumnName = "Ид-пациента";
                         dt.Columns["Description"].ColumnName = "Описание";
                         dt.Columns["Date"].ColumnName = "Дата";
                         dt.Columns["Suma"].ColumnName = "Сума";
@@ -158,7 +158,7 @@ namespace Dental
                 {
                     DataTable dt = DatabaseWorker.SelectPered().Tables[0];
                     dt.Columns["Id"].ColumnName = "Идентификатор";
-                    dt.Columns["id_Patient"].ColumnName = "Ид.пациента";
+                    dt.Columns["id_Patient"].ColumnName = "Ид-пациента";
                     dt.Columns["Description"].ColumnName = "Описание";
                     dt.Columns["Date"].ColumnName = "Дата";
                     dt.Columns["Suma"].ColumnName = "Сума";
@@ -186,7 +186,7 @@ namespace Dental
                         
                         try
                         {
-                            DatabaseWorker.InsertTransaction(row["Сума"].ToString(), row["Описание"].ToString(), row["Ид.пациента"].ToString(), row["Дата"].ToString(), "Принятие предоплаты");
+                            DatabaseWorker.InsertTransaction(row["Сума"].ToString(), row["Описание"].ToString(), row["Ид-пациента"].ToString(), row["Дата"].ToString(), "Принятие предоплаты");
                             DatabaseWorker.DeletePered(row["Идентификатор"].ToString());                            
                         }
                         catch (Exception ex)
@@ -199,7 +199,7 @@ namespace Dental
                             {
                                 DataTable dt = DatabaseWorker.SelectPered().Tables[0];
                                 dt.Columns["Id"].ColumnName = "Идентификатор";
-                                dt.Columns["id_Patient"].ColumnName = "Ид.пациента";
+                                dt.Columns["id_Patient"].ColumnName = "Ид-пациента";
                                 dt.Columns["Description"].ColumnName = "Описание";
                                 dt.Columns["Date"].ColumnName = "Дата";
                                 dt.Columns["Suma"].ColumnName = "Сума";
@@ -220,10 +220,10 @@ namespace Dental
 
         private void OpenPatient(object sender, object e)
         {
-            Patient patient = DatabaseWorker.getPatient(((DataRowView)View.SelectedItems[0])["Ид.пациента"].ToString());            
+            Patient patient = DatabaseWorker.getPatient(((DataRowView)View.SelectedItems[0])["Ид-пациента"].ToString());            
             string tmp = string.Empty;
             tmp = "Карточка:" + patient.Name + " "+patient.Surname+" "+patient.FatherName;         
-            TabItem tb = new TabItem() { Header = tmp, Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["Ид.пациента"].ToString()) } };
+            TabItem tb = new TabItem() { Header = tmp, Content = new Frame() { Content = new Card(((DataRowView)View.SelectedItems[0])["Ид-пациента"].ToString()) } };
             MainWindow.Pager.Items.Add(tb);
             MainWindow.Pager.SelectedItem = tb;
         }
@@ -232,11 +232,11 @@ namespace Dental
 
         private void Open_Patient(object sender, object e)
         {
-            Patient patient = DatabaseWorker.getPatient(((DataRowView)View1.SelectedItems[0])["Ид.пациента"].ToString());
+            Patient patient = DatabaseWorker.getPatient(((DataRowView)View1.SelectedItems[0])["Ид-пациента"].ToString());
           
             string tmp = string.Empty;
             tmp = "Карточка:" + patient.Name + " "+patient.Surname+" "+patient.FatherName;            
-            TabItem tb = new TabItem() { Header = tmp, Content = new Frame() { Content = new Card(((DataRowView)View1.SelectedItems[0])["Ид.пациента"].ToString()) } };
+            TabItem tb = new TabItem() { Header = tmp, Content = new Frame() { Content = new Card(((DataRowView)View1.SelectedItems[0])["Ид-пациента"].ToString()) } };
             MainWindow.Pager.Items.Add(tb);
             MainWindow.Pager.SelectedItem = tb;
         }
