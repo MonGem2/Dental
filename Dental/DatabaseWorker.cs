@@ -98,9 +98,45 @@ namespace Dental
             }
 
         }
+        public static DataSet SelectDepthbyId(string Id)
+        {
+            string text = $"Select * From [Depth] where id_patient={Id}";
+            try
+            {
+
+                DataSet ds = new DataSet();
+                var da = new SQLiteDataAdapter(text, con);
+                da.AcceptChangesDuringUpdate = true;
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
         public static DataSet SelectPered()
         {
             string text = "Select * From [Pered]";
+            try
+            {
+
+                DataSet ds = new DataSet();
+                var da = new SQLiteDataAdapter(text, con);
+                da.AcceptChangesDuringUpdate = true;
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public static DataSet SelectPeredbyId(string Id)
+        {
+            string text = $"Select * From [Pered] where id_patient={Id}";
             try
             {
 

@@ -69,8 +69,9 @@ namespace Dental
             Info.Text += "Робочий: " + patient.Work_Phone + "\n";
             Info.Text += "Описание: " + patient.Description;
             Treatment.Text = DatabaseWorker.GetTreatmentString(Id);
-            foreach(var el in DatabaseWorker.getPatientsTransactionString(Id))
-            Transact.Text += el+"\n";
+            //foreach(var el in DatabaseWorker.getPatientsTransactionString(Id))
+            //Transact.Text += el+"\n";
+            Transact.Content = new PatientDepth(Id);
         }
 
         public Card(string id)

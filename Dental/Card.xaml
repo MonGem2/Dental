@@ -38,7 +38,7 @@
             </TabItem>
             <TabItem Header="История оплат">
                 <ScrollViewer>
-                    <TextBlock Name="Transact" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    <Frame Name="Transact"/>
                 </ScrollViewer>
             </TabItem>
         </TabControl>

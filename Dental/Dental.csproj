@@ -94,6 +94,9 @@
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseWorker.cs" />
+    <Compile Include="PatientDepth.xaml.cs">
+      <DependentUpon>PatientDepth.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Depther.xaml.cs">
       <DependentUpon>Depther.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,10 @@
     <Page Include="Card.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PatientDepth.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Depth.xaml">
       <SubType>Designer</SubType>

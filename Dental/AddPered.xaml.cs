@@ -30,7 +30,7 @@ namespace Dental
         public AddPered(string id_Patient)
         {
             InitializeComponent();
-            Price.Text = DateTime.Today.ToShortDateString();
+            Date.SelectedDate = DateTime.Today;
             this.id_Patient = id_Patient;
             Id_Pat.Text = id_Patient;
         }
