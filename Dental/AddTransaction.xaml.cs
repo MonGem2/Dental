@@ -55,11 +55,18 @@ namespace Dental
 
         private void Find(object sender, RoutedEventArgs e)
         {
-            Patient p= DatabaseWorker.GetPatient(Name.Text, Surname.Text, FatherName.Text);
-            Id_Pat.Text = p.Id;
-            Name.Text = p.Name;
-            Surname.Text = p.Surname;
-            FatherName.Text = p.FatherName;
+            try
+            {
+                Patient p = DatabaseWorker.GetPatient(Name.Text, Surname.Text, FatherName.Text);
+                Id_Pat.Text = p.Id;
+                Name.Text = p.Name;
+                Surname.Text = p.Surname;
+                FatherName.Text = p.FatherName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
