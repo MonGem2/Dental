@@ -16,11 +16,6 @@ namespace Dental
         [STAThread]
         public static void Main()
         {
-            if (DateTime.Now >= new DateTime(2019,6,24))
-            {
-                MessageBox.Show("Time is over!!!");
-                return;
-            }
             var application = new App();
             application.InitializeComponent();
             application.Run();
